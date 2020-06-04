@@ -57,6 +57,20 @@ class API {
       return err;
     }
   }
+
+  async messageList() {
+    try {
+      await this.axiosInstance.get("/messages")
+      .then(function (dataMessages) {
+        // handle success
+        return dataMessages;
+      })
+    } catch (err) {
+      helpMeInstructor(err);
+      return err;
+    }
+  }
+
 }
 
 // WARNING.. do not touch below this line if you want to have a good day =]
