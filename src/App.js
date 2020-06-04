@@ -5,7 +5,6 @@ import { Navigation } from "./components";
 import configureStore from "./redux/configureStore";
 
 const { store, persistor } = configureStore();
-// Marcel Note
 const KWITTER = {
   store,
   persistor,
