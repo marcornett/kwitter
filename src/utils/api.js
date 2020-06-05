@@ -71,7 +71,31 @@ class API {
     }
   }
 
+  async postlike({messageId}) {
+    try {
+      await this.axiosInstance.post('/likes', {
+        messageId
+      });
+    } catch (err) {
+      return err;
+    }
+  }
+
+ 
+
+
+
+
 }
+
+
+    
+  
+
+  
+
+
+
 
 // WARNING.. do not touch below this line if you want to have a good day =]
 
