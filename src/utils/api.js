@@ -49,27 +49,58 @@ class API {
     }
   }
 
-  //To add a user to the database
-  async createUser ({ username, displayName, password }) {
-    // const URL = 'https://kwitter-api.herokuapp.com/users';
-    try {
-      let res = await this.axiosInstance.post('/users', {
-        username,
-        displayName,
-        password
-      });
-
-      console.log(res);
-    } catch (error) {
-      console.log({ error });
-    }
-  };
-
   async logout() {
     try {
       await this.axiosInstance.get("/auth/logout");
     } catch (err) {
       helpMeInstructor(err);
+      return err;
+    }
+  }
+
+  async createUser({ username, displayName, password }) {
+    try {
+      await this.axiosInstance.post('/users', {
+        username,
+        displayName,
+        password
+      });
+    } catch (err) {
+      return err;
+    }
+  }
+
+  async deleteUser(username) {
+    try {
+      await this.axiosInstance.delete(`/users/${username}`);
+    } catch (err) {
+      return err;
+    }
+  }
+
+  // Unsure how image data needs to be sent, check documentation on Kwitter API for PUT User Picture
+  async getUserPicture(username) {
+    try {
+      await this.axiosInstance.get(`/users/${username}/picture`);
+    } catch (err) {
+      return err;
+    }
+  }
+
+  async putUserPicture(username) {
+    try {
+      await this.axiosInstance.put(`/users/${username}/picture`);
+    } catch (err) {
+      return err;
+    }
+  }
+
+  async postMessage({ text }) {
+    try {
+      await this.axiosInstance.post('/messages', {
+        text
+      });
+    } catch (err) {
       return err;
     }
   }
