@@ -49,6 +49,22 @@ class API {
     }
   }
 
+  //To add a user to the database
+  async createUser ({ username, displayName, password }) {
+    // const URL = 'https://kwitter-api.herokuapp.com/users';
+    try {
+      let res = await this.axiosInstance.post('/users', {
+        username,
+        displayName,
+        password
+      });
+
+      console.log(res);
+    } catch (error) {
+      console.log({ error });
+    }
+  };
+
   async logout() {
     try {
       await this.axiosInstance.get("/auth/logout");
