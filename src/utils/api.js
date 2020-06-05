@@ -81,6 +81,14 @@ class API {
     }
   }
 
+  async deleteLike({likeId}) {
+    try {
+      await this.axiosInstance.delete(`/likes/${likeId}`);
+    } catch (err) {
+      return err;
+    }
+  }
+
  
 
 
