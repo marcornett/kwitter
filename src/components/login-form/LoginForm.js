@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import ProptTypes from 'prop-types';
-import { Loader } from '../loader';
+import Loader from '../loader/Loader';
 import './LoginForm.css';
 
 import { Link } from 'react-router-dom';
@@ -14,8 +14,6 @@ export const LoginForm = ({ login, loading, error }) => {
 		password: ''
 	});
 
-	const isFormValid = ({ username, passwords }) => username && passwords;
-
 	const handleLogin = (event) => {
 		event.preventDefault();
 		login(state);
@@ -27,7 +25,9 @@ export const LoginForm = ({ login, loading, error }) => {
 		setState((prevState) => ({ ...prevState, [inputName]: inputValue }));
 	};
 
-	return (
+	return loading ? (
+		<Loader />
+	) : (
 		<Grid textAlign="center" verticalAlign="middle" className="app">
 			<Grid.Column style={{ maxWidth: 450 }}>
 				<Header as="h1" icon color="black" textAlign="center">
