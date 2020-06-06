@@ -1,26 +1,34 @@
-import React, { Component } from 'react';
-// import axios from 'axios';
-import API from '../../utils/api';
+import React, { useState } from 'react';
+import ProptTypes from 'prop-types';
 
 import { Grid, Form, Segment, Button, Header, Message, Icon } from 'semantic-ui-react';
 import { Link } from 'react-router-dom';
+// import {} from '../../redux/actions/auth';
 
-class Register extends Component {
-	constructor(props) {
-		super(props);
-		this.state = {
-			username: '',
-			displayName: '',
-			password: '',
-			passwordConfirmation: '',
-			loading: false,
-			errors: []
-		};
-	}
+// class Register extends Component {
+// 	constructor(props) {
+// 		super(props);
+// 		this.state = {
+// 			username: '',
+// 			displayName: '',
+// 			password: '',
+// 			passwordConfirmation: '',
+// 			loading: false,
+// 			errors: []
+// 		};
+// 	}
 
-	displayErrors = (errors) => errors.map((error, idx) => <p key={idx}>{error.message}</p>);
+export const Register = ({ register, loading, error }) => {
+	const [ state, setState ] = useState({
+		displayName: '',
+		password: '',
+		passwordConfirmation: '',
+		loading: false
+	});
 
-	isNamesValid = ({ username, displayName }) => {
+	//const displayErrors = (errors) => state.errors.map((error, idx) => <p key={idx}>{error.message}</p>);
+
+	const isNamesValid = ({ username, displayName }) => {
 		if (username.length < 3 || displayName.length < 3) {
 			return false;
 		}
@@ -31,7 +39,7 @@ class Register extends Component {
 		return true;
 	};
 
-	isPasswordValid = ({ password, passwordConfirmation }) => {
+	const isPasswordValid = ({ password, passwordConfirmation }) => {
 		if (password.length < 3 || passwordConfirmation.length < 3) {
 			return false;
 		}
@@ -42,135 +50,98 @@ class Register extends Component {
 		return true;
 	};
 
-	isFormEmpty = ({ username, displayName, password, passwordConfirmation }) => {
-		return !username.length || !displayName.length || !password.length || !passwordConfirmation.length;
+	const isFormEmpty = (state) => {
+		return (
+			!state.username.length ||
+			!state.displayName.length ||
+			!state.password.length ||
+			!state.passwordConfirmation.length
+		);
 	};
 
-	isFormValid = () => {
-		let errors = [];
-		let err;
-		if (this.isFormEmpty(this.state)) {
-			err = { message: 'Feilds cant be empty' };
-			this.setState({ errors: errors.concat(err) });
-			return false;
-		} else if (!this.isNamesValid(this.state)) {
-			err = { message: 'Names have to longer then 3 letters and shorter than 20' };
-			this.setState({ errors: errors.concat(err) });
-			return false;
-		} else if (!this.isPasswordValid(this.state)) {
-			err = { message: 'Password is invalid' };
-			this.setState({ errors: errors.concat(err) });
-			return false;
-		} else {
-			return true;
-		}
-	};
-
-	handleChange = (evt) => {
-		this.setState({
-			[evt.target.name]: evt.target.value
-		});
-	};
-
-	// createUser = async ({ username, displayName, password }) => {
-	// 	const URL = 'https://kwitter-api.herokuapp.com/users';
-	// 	try {
-	// 		let res = await axios.post(URL, {
-	// 			username,
-	// 			displayName,
-	// 			password
-	// 		});
-
-	// 		console.log(res);
-	// 	} catch (error) {
-	// 		console.log({ error });
+	// const isFormValid = () => {
+	// 	let errors = [];
+	// 	let err;
+	// 	if (isFormEmpty(this.state)) {
+	// 		err = { message: 'Feilds cant be empty' };
+	// 		setState({ errors: errors.concat(err) });
+	// 		return false;
+	// 	} else if (!isNamesValid(this.state)) {
+	// 		err = { message: 'Names have to longer then 3 letters and shorter than 20' };
+	// 		setState({ errors: errors.concat(err) });
+	// 		return false;
+	// 	} else if (isPasswordValid(this.state)) {
+	// 		err = { message: 'Password is invalid' };
+	// 		setState({ errors: errors.concat(err) });
+	// 		return false;
+	// 	} else {
+	// 		return true;
 	// 	}
 	// };
 
-	handleSubmit = async (evt) => {
-		evt.preventDefault();
-		if (this.isFormValid()) {
-			this.setState({ errors: [], loading: true });
-			API.createUser(this.state);
-		}
+	const handleChange = (evt) => {
+		const inputName = evt.target.name;
+		const inputValue = evt.target.value;
+		setState((prevState) => ({ ...prevState, [inputName]: inputValue }));
 	};
 
-	render() {
-		const { username, displayName, password, passwordConfirmation, errors, loading } = this.state;
-		return (
-			<Grid textAlign="center" verticalAlign="middle" className="app">
-				<Grid.Column style={{ maxWidth: 450 }}>
-					<Header as="h1" icon color="black" textAlign="center">
-						<Icon name="globe" color="black" />
-						Register for devChat!
-					</Header>
-					<Form onSubmit={this.handleSubmit} size="large">
-						<Segment stacked>
-							<Form.Input
-								fluid
-								name="username"
-								icon="user"
-								iconPosition="left"
-								placeholder="Username"
-								type="text"
-								value={username}
-								onChange={this.handleChange}
-							/>
-							<Form.Input
-								fluid
-								name="displayName"
-								icon="user"
-								iconPosition="left"
-								placeholder="Display Name"
-								type="text"
-								value={displayName}
-								onChange={this.handleChange}
-							/>
-							<Form.Input
-								fluid
-								name="password"
-								icon="lock"
-								iconPosition="left"
-								placeholder="Password"
-								type="password"
-								value={password}
-								onChange={this.handleChange}
-							/>
+	const handleSubmit = async (evt) => {
+		evt.preventDefault();
 
-							<Form.Input
-								fluid
-								name="passwordConfirmation"
-								icon="repeat"
-								iconPosition="left"
-								placeholder="Password Confirmation"
-								type="password"
-								value={passwordConfirmation}
-								onChange={this.handleChange}
-							/>
-							<Button
-								disabled={loading}
-								className={loading ? 'loading' : ''}
-								color="blue"
-								fluid
-								size="large"
-							>
-								Submit
-							</Button>
-						</Segment>
-					</Form>
-					{errors.length > 0 && (
-						<Message error>
-							<h3>Error</h3>
-							{this.displayErrors(errors)}
-						</Message>
-					)}
-					<Message>
-						Already a user? <Link to="/"> Sign In</Link>
-					</Message>
-				</Grid.Column>
-			</Grid>
-		);
-	}
-}
+		setState({ errors: [], loading: true });
+		// API.createUser(state);
+		register(state);
+	};
+	return (
+		<Grid textAlign="center" verticalAlign="middle" className="app">
+			<Grid.Column style={{ maxWidth: 450 }}>
+				<Header as="h1" icon color="black" textAlign="center">
+					<Icon name="globe" color="black" />
+					Register for devChat!
+				</Header>
+				<Form onSubmit={handleSubmit} size="large">
+					<Segment stacked>
+						<Form.Input
+							fluid
+							name="displayName"
+							icon="user"
+							iconPosition="left"
+							placeholder="Display Name"
+							type="text"
+							value={state.displayName}
+							onChange={handleChange}
+						/>
+						<Form.Input
+							fluid
+							name="password"
+							icon="lock"
+							iconPosition="left"
+							placeholder="Password"
+							type="password"
+							value={state.password}
+							onChange={handleChange}
+						/>
 
-export default Register;
+						<Form.Input
+							fluid
+							name="passwordConfirmation"
+							icon="repeat"
+							iconPosition="left"
+							placeholder="Password Confirmation"
+							type="password"
+							value={state.passwordConfirmation}
+							onChange={handleChange}
+						/>
+						<Button disabled={loading} className={loading ? 'loading' : ''} color="blue" fluid size="large">
+							Submit
+						</Button>
+					</Segment>
+				</Form>
+
+				<Message>
+					Already a user? <Link to="/"> Sign In</Link>
+				</Message>
+			</Grid.Column>
+		</Grid>
+	);
+};
