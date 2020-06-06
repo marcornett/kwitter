@@ -145,9 +145,3 @@ export const Register = ({ register, loading, error }) => {
 		</Grid>
 	);
 };
-
-// Register.propTypes = {
-// 	login: ProptTypes.func.isRequired,
-// 	loading: ProptTypes.bool,
-// 	error: ProptTypes.string
-// };
