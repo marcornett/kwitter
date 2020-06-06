@@ -9,7 +9,7 @@ import { Grid, Form, Segment, Header, Message, Icon } from 'semantic-ui-react';
 
 export const LoginForm = ({ login, loading, error }) => {
 	// Not to be confused with "this.setState" in classes
-	const [ state, setState ] = useState({
+	const [state, setState] = useState({
 		username: '',
 		password: ''
 	});
