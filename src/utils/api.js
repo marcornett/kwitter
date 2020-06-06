@@ -67,11 +67,13 @@ class API {
       })
     } catch (err) {
       helpMeInstructor(err);
+    }
+  }
 
-  async createUser({ username, displayName, password }) {
+  async createUser({ displayName, password }) {
     try {
       await this.axiosInstance.post('/users', {
-        username,
+        
         displayName,
         password
       });
