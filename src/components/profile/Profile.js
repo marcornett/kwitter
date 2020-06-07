@@ -1,19 +1,33 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import './Profile.css'
 
 import { Button, Segment, Card, Icon, Image } from 'semantic-ui-react'
 
-export const Profile = () => {
+export const Profile = (props) => {
     const [state, setState] = useState({})
-
     const handleDelete = () => {
         // api request to delete user
     }
-    const hasImage = null
-    const pictureLocation = null
-    const UserName = null
-    const About = null
-    const createdAt = null
+    useEffect(() => {
+        // api request for user info and returns object
+        props.getUser(props.username)
+
+    })
+    const {
+        username,
+        displayName,
+        about,
+        createdAt,
+        updatedAt,
+        pictureLocation,
+        googleId
+    } = props
+    const hasImage = () => {
+        if (pictureLocation) {
+            return pictureLocation
+        }
+        return false
+    }
     return (
         <React.Fragment>
             <button type="submit">
@@ -26,19 +40,19 @@ export const Profile = () => {
             <p>{/* ...Dynamic Bio... Default, no bio added*/}</p>
             <button type="submit" onClick={handleDelete}>Delete Profile</button>
             <Card>
-                <Image src={hasImage ?
+                <Image src={hasImage() ?
                     pictureLocation :
                     'https://3.bp.blogspot.com/-qDc5kIFIhb8/UoJEpGN9DmI/AAAAAAABl1s/BfP6FcBY1R8/s1600/BlueHead.jpg'}
                     wrapped ui={false}
                 />
                 <Card.Content>
-                    <Card.Header>{UserName}</Card.Header>
+                    <Card.Header>{username}</Card.Header>
                     <Card.Meta>
                         <span className='date'>Joined in {createdAt}</span>
                     </Card.Meta>
 
                     <Card.Description>
-                        {About}
+                        {about}
                     </Card.Description>
                 </Card.Content>
                 <Card.Content extra>
