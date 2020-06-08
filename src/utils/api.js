@@ -44,7 +44,7 @@ class API {
       return result;
     } catch (err) {
       // Instructor is logging you out because this failed
-      helpMeInstructor(err);
+      helpMeInstructor(err); // comedian eh?
       return err;
     }
   }
@@ -58,13 +58,24 @@ class API {
     }
   }
 
+  async getUserInfo(username) {
+    try {
+      const response = await this.axiosInstance.get(`/users/${username}`)
+      console.log(response)
+      return response;
+    } catch (err) {
+      helpMeInstructor(err);
+    }
+  }
+
+
   async messageList() {
     try {
       await this.axiosInstance.get("/messages")
-      .then(function (dataMessages) {
-        // handle success
-        return dataMessages;
-      })
+        .then(function (dataMessages) {
+          // handle success
+          return dataMessages;
+        })
     } catch (err) {
 
       helpMeInstructor(err);
@@ -76,7 +87,7 @@ class API {
     try {
       console.log({ username, displayName, password })
       await this.axiosInstance.post('/users', {
-        username, 
+        username,
         displayName,
         password
       });
@@ -87,8 +98,6 @@ class API {
       return err;
     }
   }
-
-
 
   async deleteUser(username) {
     try {
@@ -125,7 +134,7 @@ class API {
     }
   }
 
-  async postlike({messageId}) {
+  async postlike({ messageId }) {
     try {
       await this.axiosInstance.post('/likes', {
         messageId
@@ -135,29 +144,14 @@ class API {
     }
   }
 
-  async deleteLike({likeId}) {
+  async deleteLike({ likeId }) {
     try {
       await this.axiosInstance.delete(`/likes/${likeId}`);
     } catch (err) {
       return err;
     }
   }
-
- 
-
-
-
-
 }
-
-
-    
-  
-
-  
-
-
-
 
 // WARNING.. do not touch below this line if you want to have a good day =]
 
