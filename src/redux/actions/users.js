@@ -10,8 +10,11 @@ export const getUser = (username) => async (dispatch, getState) => {
     try {
         const payload = await api.getUserInfo(username);
         // ℹ️ℹ️This is how you would debug the response to a request ℹ️ℹ️
-        //console.log({ result })
-        dispatch({ type: USER });
+        console.log({ payload })
+        dispatch({
+            type: USER,
+            payload
+        });
     } catch (err) {
         dispatch({
             type: USER_FAILURE,

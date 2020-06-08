@@ -13,9 +13,24 @@ const INITIAL_STATE = {
 export const usersReducer = (state = INITIAL_STATE, action) => {
     switch (action.type) {
         case USER:
+            const {
+                username,
+                displayName,
+                about,
+                createdAt,
+                updatedAt,
+                pictureLocation,
+                googleId
+            } = action.payload.user
             return {
                 ...state,
-                username: action.payload
+                username,
+                displayName,
+                about,
+                createdAt,
+                updatedAt,
+                pictureLocation,
+                googleId
             }
         case USER_FAILURE:
             return {

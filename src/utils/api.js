@@ -60,11 +60,9 @@ class API {
 
   async getUserInfo(username) {
     try {
-      await this.axiosInstance.get(`/users${username}`)
-        .then(function (dataMessages) {
-          // handle success
-          return dataMessages;
-        })
+      const response = await this.axiosInstance.get(`/users/${username}`)
+      console.log(response)
+      return response;
     } catch (err) {
       helpMeInstructor(err);
     }
@@ -83,10 +81,10 @@ class API {
     }
   }
 
-  async createUser({ displayName, password }) {
+  async createUser({ username, displayName, password }) {
     try {
       await this.axiosInstance.post('/users', {
-
+        username,
         displayName,
         password
       });
