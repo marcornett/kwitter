@@ -77,19 +77,24 @@ class API {
           return dataMessages;
         })
     } catch (err) {
+
       helpMeInstructor(err);
     }
   }
+  
 
   async createUser({ username, displayName, password }) {
     try {
+      console.log({ username, displayName, password })
       await this.axiosInstance.post('/users', {
         username,
         displayName,
         password
       });
+    
     } catch (err) {
 
+      helpMeInstructor(err);
       return err;
     }
   }

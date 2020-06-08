@@ -19,78 +19,34 @@ import { Link } from 'react-router-dom';
 // 	}
 
 export const Register = ({ register, loading, error }) => {
-	const [ state, setState ] = useState({
+	const [ user, setUserState ] = useState({
+		username: '',
 		displayName: '',
 		password: '',
-		passwordConfirmation: '',
-		loading: false
+		passwordConfirmation: ''
 	});
 
-	//const displayErrors = (errors) => state.errors.map((error, idx) => <p key={idx}>{error.message}</p>);
-
-	const isNamesValid = ({ username, displayName }) => {
-		if (username.length < 3 || displayName.length < 3) {
-			return false;
-		}
-		if (username.length > 20 || displayName.length > 20) {
+	const isValidPassword = ({ password }) => {
+		if (password < 6) {
 			return false;
 		}
 
 		return true;
 	};
 
-	const isPasswordValid = ({ password, passwordConfirmation }) => {
-		if (password.length < 3 || passwordConfirmation.length < 3) {
-			return false;
-		}
-		if (password.length > 20 || passwordConfirmation.length > 20) {
-			return false;
-		}
-
-		return true;
+	const isFormEmpty = ({ displayName, password }) => {
+		return !displayName.length || !password.length;
 	};
-
-	const isFormEmpty = (state) => {
-		return (
-			!state.username.length ||
-			!state.displayName.length ||
-			!state.password.length ||
-			!state.passwordConfirmation.length
-		);
-	};
-
-	// const isFormValid = () => {
-	// 	let errors = [];
-	// 	let err;
-	// 	if (isFormEmpty(this.state)) {
-	// 		err = { message: 'Feilds cant be empty' };
-	// 		setState({ errors: errors.concat(err) });
-	// 		return false;
-	// 	} else if (!isNamesValid(this.state)) {
-	// 		err = { message: 'Names have to longer then 3 letters and shorter than 20' };
-	// 		setState({ errors: errors.concat(err) });
-	// 		return false;
-	// 	} else if (isPasswordValid(this.state)) {
-	// 		err = { message: 'Password is invalid' };
-	// 		setState({ errors: errors.concat(err) });
-	// 		return false;
-	// 	} else {
-	// 		return true;
-	// 	}
-	// };
 
 	const handleChange = (evt) => {
 		const inputName = evt.target.name;
 		const inputValue = evt.target.value;
-		setState((prevState) => ({ ...prevState, [inputName]: inputValue }));
+		setUserState((prevState) => ({ ...prevState, [inputName]: inputValue }));
 	};
 
-	const handleSubmit = async (evt) => {
+	const handleSubmit = (evt) => {
 		evt.preventDefault();
-
-		setState({ errors: [], loading: true });
-		// API.createUser(state);
-		register(state);
+		register(user);
 	};
 	return (
 		<Grid textAlign="center" verticalAlign="middle" className="app">
@@ -103,12 +59,22 @@ export const Register = ({ register, loading, error }) => {
 					<Segment stacked>
 						<Form.Input
 							fluid
+							name="username"
+							icon="user"
+							iconPosition="left"
+							placeholder="Display Name"
+							type="text"
+							value={user.username}
+							onChange={handleChange}
+						/>
+						<Form.Input
+							fluid
 							name="displayName"
 							icon="user"
 							iconPosition="left"
 							placeholder="Display Name"
 							type="text"
-							value={state.displayName}
+							value={user.displayName}
 							onChange={handleChange}
 						/>
 						<Form.Input
@@ -118,7 +84,7 @@ export const Register = ({ register, loading, error }) => {
 							iconPosition="left"
 							placeholder="Password"
 							type="password"
-							value={state.password}
+							value={user.password}
 							onChange={handleChange}
 						/>
 
@@ -129,7 +95,7 @@ export const Register = ({ register, loading, error }) => {
 							iconPosition="left"
 							placeholder="Password Confirmation"
 							type="password"
-							value={state.passwordConfirmation}
+							value={user.passwordConfirmation}
 							onChange={handleChange}
 						/>
 						<Button disabled={loading} className={loading ? 'loading' : ''} color="blue" fluid size="large">
@@ -137,11 +103,16 @@ export const Register = ({ register, loading, error }) => {
 						</Button>
 					</Segment>
 				</Form>
-
 				<Message>
 					Already a user? <Link to="/"> Sign In</Link>
 				</Message>
 			</Grid.Column>
 		</Grid>
 	);
+};
+
+Register.propTypes = {
+	register: ProptTypes.func.isRequired,
+	loading: ProptTypes.bool,
+	error: ProptTypes.string
 };
