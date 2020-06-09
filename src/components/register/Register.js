@@ -4,7 +4,7 @@ import Loader from '../loader/Loader';
 import { Grid, Form, Segment, Button, Header, Message, Icon } from 'semantic-ui-react';
 import { Link } from 'react-router-dom';
 
-export const Register = ({ register, loading, error }) => {
+export const Register = ({ loading, error }) => {
 	const [ user, setUserState ] = useState({
 		username: '',
 		displayName: '',
@@ -21,7 +21,7 @@ export const Register = ({ register, loading, error }) => {
 
 	const handleSubmit = (evt) => {
 		evt.preventDefault();
-		register(user);
+		// register(user);
 	};
 	return loading ? (
 		<Loader />
@@ -93,7 +93,7 @@ export const Register = ({ register, loading, error }) => {
 };
 
 Register.propTypes = {
-	register: ProptTypes.func.isRequired,
+	//register: ProptTypes.func.isRequired,
 	loading: ProptTypes.bool,
 	error: ProptTypes.string
 };
