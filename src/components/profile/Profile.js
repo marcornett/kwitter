@@ -4,13 +4,20 @@ import './Profile.css'
 import { Button, Segment, Card, Icon, Image } from 'semantic-ui-react'
 
 export const Profile = (props) => {
-    const handleDelete = () => {
-        // api request to delete user
-    }
     useEffect(() => {
-        // props.getUser("testName")
         props.getUser(props.username)
     })
+
+    const handleDelete = (event) => {
+        props.deleteUser(props.username)
+    }
+
+    const hasImage = () => {
+        if (pictureLocation) {
+            return pictureLocation
+        }
+        return false
+    }
 
     const {
         username,
@@ -21,12 +28,7 @@ export const Profile = (props) => {
         pictureLocation,
         // googleId
     } = props
-    const hasImage = () => {
-        if (pictureLocation) {
-            return pictureLocation
-        }
-        return false
-    }
+
     return (
         <React.Fragment>
             <button type="submit">
@@ -35,8 +37,6 @@ export const Profile = (props) => {
             <button type="submit">
                 Update Image
             </button>
-            <div>{/* {...Dynamic Name...} */}</div>
-            <p>{/* ...Dynamic Bio... Default, no bio added*/}</p>
             <button type="submit" onClick={handleDelete}>Delete Profile</button>
             <Card>
                 <Image src={hasImage() ?
@@ -64,9 +64,9 @@ export const Profile = (props) => {
                     </a>
                 </Card.Content>
                 <Segment inverted>
-                    <Button inverted color='red'>
+                    <Button onClick={handleDelete} inverted color='red'>
                         Delete Profile
-                </Button>
+                    </Button>
                 </Segment>
             </Card>
 

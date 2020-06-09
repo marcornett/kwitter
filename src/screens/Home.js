@@ -1,5 +1,5 @@
 import React from "react";
-import { LoginFormContainer, MenuContainer, ProfileContainer } from "../components";
+import { LoginFormContainer, MenuContainer } from "../components";
 
 export const HomeScreen = () => (
   <>
