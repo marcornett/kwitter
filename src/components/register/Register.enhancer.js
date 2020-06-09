@@ -1,5 +1,5 @@
 import { connect } from 'react-redux';
-import { register } from '../../redux/actions/auth';
+//import { register } from '../../redux/actions/auth';
 
 // https://react-redux.js.org/using-react-redux/connect-mapstate#connect-extracting-data-with-mapstatetoprops
 const mapStateToProps = (state) => ({
@@ -9,7 +9,7 @@ const mapStateToProps = (state) => ({
 
 // https://react-redux.js.org/using-react-redux/connect-mapdispatch#connect-dispatching-actions-with-mapdispatchtoprops
 const mapDispatchToProps = {
-	register
+	// register
 };
 
 export const enhancer = connect(mapStateToProps, mapDispatchToProps);
