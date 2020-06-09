@@ -12,7 +12,7 @@ export const LOGOUT = 'AUTH/LOGOUT';
 */
 export const login = (credentials) => async (dispatch, getState) => {
 	try {
-		dispatch({ type: LOGIN });
+		dispatch({ type: LOGIN }); //this sets loading to true
 		const payload = await api.login(credentials);
 		// ℹ️ℹ️This is how you woud debug the response to a requestℹ️ℹ️
 		//console.log({ results });
