@@ -2,9 +2,9 @@ import { LOGIN, LOGIN_SUCCESS, LOGIN_FAILURE, LOGOUT } from '../actions';
 
 // INITIAL STATE
 const INITIAL_STATE = {
-  isAuthenticated: false,
-  loading: false,
-  error: "",
+	isAuthenticated: false,
+	loading: false,
+	error: "",
 };
 
 export const authReducer = (state = INITIAL_STATE, action) => {
