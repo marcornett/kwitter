@@ -1,42 +1,17 @@
 import React, { useState } from 'react';
 import ProptTypes from 'prop-types';
-
+import Loader from '../loader/Loader';
 import { Grid, Form, Segment, Button, Header, Message, Icon } from 'semantic-ui-react';
 import { Link } from 'react-router-dom';
-// import {} from '../../redux/actions/auth';
-
-// class Register extends Component {
-// 	constructor(props) {
-// 		super(props);
-// 		this.state = {
-// 			username: '',
-// 			displayName: '',
-// 			password: '',
-// 			passwordConfirmation: '',
-// 			loading: false,
-// 			errors: []
-// 		};
-// 	}
 
 export const Register = ({ register, loading, error }) => {
 	const [ user, setUserState ] = useState({
 		username: '',
 		displayName: '',
 		password: '',
-		passwordConfirmation: ''
+		passwordConfirmation: '',
+		error: []
 	});
-
-	const isValidPassword = ({ password }) => {
-		if (password < 6) {
-			return false;
-		}
-
-		return true;
-	};
-
-	const isFormEmpty = ({ displayName, password }) => {
-		return !displayName.length || !password.length;
-	};
 
 	const handleChange = (evt) => {
 		const inputName = evt.target.name;
@@ -48,7 +23,9 @@ export const Register = ({ register, loading, error }) => {
 		evt.preventDefault();
 		register(user);
 	};
-	return (
+	return loading ? (
+		<Loader />
+	) : (
 		<Grid textAlign="center" verticalAlign="middle" className="app">
 			<Grid.Column style={{ maxWidth: 450 }}>
 				<Header as="h1" icon color="black" textAlign="center">
@@ -58,6 +35,7 @@ export const Register = ({ register, loading, error }) => {
 				<Form onSubmit={handleSubmit} size="large">
 					<Segment stacked>
 						<Form.Input
+							required
 							fluid
 							name="username"
 							icon="user"
@@ -69,6 +47,7 @@ export const Register = ({ register, loading, error }) => {
 						/>
 						<Form.Input
 							fluid
+							required
 							name="displayName"
 							icon="user"
 							iconPosition="left"
@@ -79,6 +58,7 @@ export const Register = ({ register, loading, error }) => {
 						/>
 						<Form.Input
 							fluid
+							required
 							name="password"
 							icon="lock"
 							iconPosition="left"
@@ -90,6 +70,7 @@ export const Register = ({ register, loading, error }) => {
 
 						<Form.Input
 							fluid
+							required
 							name="passwordConfirmation"
 							icon="repeat"
 							iconPosition="left"
