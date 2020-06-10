@@ -2,15 +2,16 @@ import React, { useState } from 'react';
 import ProptTypes from 'prop-types';
 import Loader from '../loader/Loader';
 import { Grid, Form, Segment, Button, Header, Message, Icon } from 'semantic-ui-react';
-import { Link } from 'react-router-dom';
+import { Link, Redirect } from 'react-router-dom';
 
-export const Register = ({ loading, error }) => {
+export const Register = ({ register, error }) => {
 	const [ user, setUserState ] = useState({
 		username: '',
 		displayName: '',
 		password: '',
 		passwordConfirmation: '',
-		error: []
+		error: [],
+		isSubmitted: false
 	});
 
 	const handleChange = (evt) => {
@@ -21,11 +22,21 @@ export const Register = ({ loading, error }) => {
 
 	const handleSubmit = (evt) => {
 		evt.preventDefault();
-		// register(user);
+		console.log({ user });
+
+		register(user);
+		setUserState({ isSubmitted: true });
+		setUserState({
+			username: '',
+			displayName: '',
+			password: '',
+			passwordConfirmation: '',
+			error: [],
+			isSubmitted: true
+		});
 	};
-	return loading ? (
-		<Loader />
-	) : (
+
+	return (
 		<Grid textAlign="center" verticalAlign="middle" className="app">
 			<Grid.Column style={{ maxWidth: 450 }}>
 				<Header as="h1" icon color="black" textAlign="center">
@@ -79,11 +90,18 @@ export const Register = ({ loading, error }) => {
 							value={user.passwordConfirmation}
 							onChange={handleChange}
 						/>
-						<Button disabled={loading} className={loading ? 'loading' : ''} color="blue" fluid size="large">
+						<Button
+							disabled={user.isSubmitted}
+							className={user.isSubmitted ? 'loading' : ''}
+							color="blue"
+							fluid
+							size="large"
+						>
 							Submit
 						</Button>
 					</Segment>
 				</Form>
+				{user.isSubmitted ? <Redirect to="/" /> : ''}
 				<Message>
 					Already a user? <Link to="/"> Sign In</Link>
 				</Message>
@@ -93,7 +111,7 @@ export const Register = ({ loading, error }) => {
 };
 
 Register.propTypes = {
-	//register: ProptTypes.func.isRequired,
+	register: ProptTypes.func.isRequired,
 	loading: ProptTypes.bool,
 	error: ProptTypes.string
 };
