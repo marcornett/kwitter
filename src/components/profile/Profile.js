@@ -1,10 +1,13 @@
 import React, { useEffect } from 'react'
 import './Profile.css'
-import api from '../../utils/api';
 
-import { Button, Segment, Card, Icon, Image, Form } from 'semantic-ui-react'
+import { Button, Segment, Card, Image, Form } from 'semantic-ui-react'
 
 export const Profile = (props) => {
+    useEffect(() => {
+        props.getUser(props.username)
+    }, [props.pictureLocation]);
+
     const {
         username,
         displayName,
@@ -14,10 +17,6 @@ export const Profile = (props) => {
         pictureLocation,
         // googleId
     } = props
-
-    useEffect(() => {
-        props.getUser(props.username)
-    }, [pictureLocation]);
 
     const handleDelete = (event) => {
         props.deleteUser(props.username)
@@ -34,7 +33,6 @@ export const Profile = (props) => {
     const handleUpload = (event) => {
         const formElement = new FormData(event.target)
         props.addUserPicture(props.username, formElement)
-
     }
     console.log(props)
     return (
@@ -43,7 +41,7 @@ export const Profile = (props) => {
                 <Card id="card_component">
                     <Image src={
                         hasImage() ?
-                            `https://kwitter-api.herokuapp.com${props.pictureLocation}`
+                            `https://kwitter-api.herokuapp.com${pictureLocation}`
                             :
                             'https://3.bp.blogspot.com/-qDc5kIFIhb8/UoJEpGN9DmI/AAAAAAABl1s/BfP6FcBY1R8/s1600/BlueHead.jpg'
                     }
@@ -78,9 +76,7 @@ export const Profile = (props) => {
                         </Card.Description>
                     </Card.Content>
                     <Card.Content extra>
-                        <a>
-                            <span className='date'>Updated on {new Date(updatedAt).toLocaleDateString()}</span>
-                        </a>
+                        <span className='date'>Updated on {new Date(updatedAt).toLocaleDateString()}</span>
                     </Card.Content>
                     <Segment inverted>
                         <Button onClick={handleDelete} inverted color='red'>
