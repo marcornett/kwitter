@@ -1,8 +1,15 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { AboutMe } from './AboutMe';
 import { Button, Header, Image, Modal } from 'semantic-ui-react';
 
 export const AboutMeModal = ({ pictureLocation, displayName }) => {
+	const [ isModalOpen, setModal ] = useState({
+		open: false
+	});
+
+	const close = () => {
+		setModal((prevState) => ({ ...prevState, open: true }));
+	};
 	return (
 		<Modal trigger={<Button>Update Your AboutMe</Button>}>
 			<Modal.Header>Update Your Profile</Modal.Header>
@@ -17,6 +24,7 @@ export const AboutMeModal = ({ pictureLocation, displayName }) => {
 					<AboutMe />
 				</Modal.Description>
 			</Modal.Content>
+			<Modal.Actions />
 		</Modal>
 	);
 };
