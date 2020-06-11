@@ -70,16 +70,13 @@ class API {
 
   async messageList() {
     try {
-      await this.axiosInstance.get("/messages")
-        .then(function (dataMessages) {
-          // handle success
-          return dataMessages;
-        })
+      const response = await this.axiosInstance.get("/messages?limit=100&offset=0")
+      return Object.keys(response.messages).map(key => response.messages[key])
     } catch (err) {
-
       helpMeInstructor(err);
     }
   }
+  //result = Object.keys(result.messages).map(key => result.messages[key])
 
 
   async createUser({ username, displayName, password }) {
