@@ -111,9 +111,11 @@ class API {
     }
   }
 
-  async putUserPicture(username) {
+  async putUserPicture(username, formData) {
     try {
-      await this.axiosInstance.put(`/users/${username}/picture`);
+      await this.axiosInstance.put(`/users/${username}/picture`,
+        formData
+      );
     } catch (err) {
       return err;
     }
