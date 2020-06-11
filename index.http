@@ -1,1 +1,5 @@
 GET https://kwitter-api.herokuapp.com/users/testName
+
+###
+
+PUT https://kwitter-api.herokuapp.com/users/testName/picture

@@ -1,4 +1,4 @@
-import { USER, USER_FAILURE, DELETE_USER } from "../actions"
+import { USER, USER_FAILURE, DELETE_USER, PUT_PICTURE_FAILURE } from "../actions"
 
 const INITIAL_STATE = {
     username: "",
@@ -40,6 +40,10 @@ export const usersReducer = (state = INITIAL_STATE, action) => {
         case DELETE_USER:
             return {
                 ...INITIAL_STATE
+            }
+        case PUT_PICTURE_FAILURE:
+            return {
+                error: action.payload
             }
         default:
             return state
