@@ -2,6 +2,7 @@ import React, { useEffect } from 'react';
 import './Profile.css';
 
 import { Button, Segment, Card, Icon, Image } from 'semantic-ui-react';
+import { AboutMeModal } from '../aboutMe/AboutMeModal';
 
 export const Profile = (props) => {
 	useEffect(() => {
@@ -36,7 +37,7 @@ export const Profile = (props) => {
 			<button type="submit" onClick={handleDelete}>
 				Delete Profile
 			</button>
-			<button type="submit">Update About Me</button>
+			<AboutMeModal displayName="displayName" />
 			<Card>
 				<Image
 					src={
