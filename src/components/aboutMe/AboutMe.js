@@ -2,29 +2,34 @@ import React, { useState } from 'react';
 import { Grid, Form, Segment, Header } from 'semantic-ui-react';
 
 export const AboutMe = () => {
-	const [ user, updatAboutSection ] = useState({
+	const [ user, updateAboutSection ] = useState({
 		username: '',
 		password: '',
-		newAboutMe: '',
+		newAboutMe: ''
+	});
+	const [ modal, setModal ] = useState({
+		open: false,
 		saved: false
 	});
 	const handleChange = (evt) => {
 		const inputName = evt.target.name;
 		const inputValue = evt.target.value;
-		updatAboutSection((prevState) => ({ ...prevState, [inputName]: inputValue }));
+		updateAboutSection((prevState) => ({ ...prevState, [inputName]: inputValue }));
+		//updateAboutSection((prevState) => ({ ...prevState, newAboutMe: evt.target.value }));
 	};
 	const handleSubmit = (evt) => {
 		evt.preventDefault();
-		updatAboutSection((prevState) => ({ ...prevState, saved: true }));
+		console.log(user);
+		setModal((prevState) => ({ ...prevState, saved: true }));
 	};
 	return (
 		<Grid textAlign="center" verticalAlign="middle" className="app">
 			<Grid.Column style={{ maxWidth: 450 }}>
-				{user.saved ? <div>Saved!</div> : null}
+				{modal.saved ? <div>Saved!</div> : null}
 				<Header as="h2" textAlign="center">
 					About Me
 				</Header>
-				<Form onSubmit={handleSubmit} class="ui form">
+				<Form onSubmit={handleSubmit} className="ui form">
 					<Segment stacked>
 						<Form.Input
 							required
@@ -39,7 +44,7 @@ export const AboutMe = () => {
 							value={user.username}
 							onChange={handleChange}
 						/>
-						<Form class="field ui">
+						<Form className="field ui">
 							<textarea
 								required
 								fluid
@@ -62,7 +67,7 @@ export const AboutMe = () => {
 								onChange={handleChange}
 							/>
 						</Form>
-						<button class="ui fluid button">Update</button>
+						<button className="ui fluid button">Update</button>
 					</Segment>
 				</Form>
 			</Grid.Column>
