@@ -3,4 +3,3 @@ export * from './login-form';
 export * from './menu';
 export * from './navigation';
 export * from './register';
-export * from './post-text-box/PostTextBox'
