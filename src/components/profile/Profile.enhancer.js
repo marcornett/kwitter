@@ -1,5 +1,5 @@
 import { connect } from "react-redux";
-import { getUser, deleteUser, addUserPicture } from "../../redux/actions/users";
+import { getUser, deleteUser, addUserPicture, getUserPicture } from "../../redux/actions/users";
 
 // https://react-redux.js.org/using-react-redux/connect-mapstate#connect-extracting-data-with-mapstatetoprops
 const mapStateToProps = (state) => ({
@@ -16,7 +16,7 @@ const mapStateToProps = (state) => ({
 const mapDispatchToProps = {
     getUser,
     deleteUser,
-    addUserPicture
+    addUserPicture,
 };
 
 export const enhancer = connect(mapStateToProps, mapDispatchToProps);
