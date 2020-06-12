@@ -6,10 +6,11 @@ import './LoginForm.css';
 import { Link } from 'react-router-dom';
 
 import { Grid, Form, Segment, Header, Message, Icon } from 'semantic-ui-react';
+import GoogleButton from '../googleButton/GoogleButton';
 
 export const LoginForm = ({ login, loading, error }) => {
 	// Not to be confused with "this.setState" in classes
-	const [state, setState] = useState({
+	const [ state, setState ] = useState({
 		username: '',
 		password: ''
 	});
@@ -61,7 +62,7 @@ export const LoginForm = ({ login, loading, error }) => {
 						<div type="submit" disabled={loading} className={loading ? 'ui buttons loading' : 'ui buttons'}>
 							<button className="ui button">Submit</button>
 							<div className="or" />
-							<button className="ui primary button">Google Login</button>
+							<GoogleButton />
 						</div>
 					</Segment>
 				</Form>

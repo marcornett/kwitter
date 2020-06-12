@@ -1,0 +1,12 @@
+#card_component {
+}
+
+.ui.segment {
+  text-align: center;
+}
+
+#image_form {
+  margin: 0 auto;
+  margin-top: 10px;
+  margin-bottom: 10px;
+}

@@ -5,7 +5,6 @@ export const LOGIN = 'AUTH/LOGIN';
 export const LOGIN_SUCCESS = 'AUTH/LOGIN_SUCCESS';
 export const LOGIN_FAILURE = 'AUTH/LOGIN_FAILURE';
 export const LOGOUT = 'AUTH/LOGOUT';
-
 /*
  AUTH ACTIONS (this is a thunk....)
  THUNKS: --> https://github.com/reduxjs/redux-thunk#whats-a-thunk
@@ -13,26 +12,10 @@ export const LOGOUT = 'AUTH/LOGOUT';
 */
 export const login = (credentials) => async (dispatch, getState) => {
 	try {
-		dispatch({ type: LOGIN });
+		dispatch({ type: LOGIN }); //this sets loading to true
 		const payload = await api.login(credentials);
 		// ℹ️ℹ️This is how you woud debug the response to a requestℹ️ℹ️
-		//console.log({ result })
-		dispatch({ type: LOGIN_SUCCESS, payload });
-	} catch (err) {
-		dispatch({
-			type: LOGIN_FAILURE,
-			payload: err.message
-		});
-	}
-};
-
-export const register = (credentials) => async (dispatch, getstate) => {
-	try {
-		dispatch({ type: LOGIN });
-		const payload = await api.createUser(credentials);
-
-		//console.log({ result });
-
+		//console.log({ results });
 		dispatch({ type: LOGIN_SUCCESS, payload });
 	} catch (err) {
 		dispatch({
@@ -54,4 +37,5 @@ export const logout = () => async (dispatch, getState) => {
 		dispatch({ type: LOGOUT });
 	}
 };
+
 // END AUTH ACTIONS

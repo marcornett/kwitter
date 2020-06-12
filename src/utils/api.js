@@ -44,7 +44,7 @@ class API {
       return result;
     } catch (err) {
       // Instructor is logging you out because this failed
-      helpMeInstructor(err);
+      helpMeInstructor(err); // comedian eh?
       return err;
     }
   }
@@ -58,32 +58,41 @@ class API {
     }
   }
 
-  async messageList() {
+  async getUserInfo(username) {
     try {
-      await this.axiosInstance.get("/messages")
-      .then(function (dataMessages) {
-        // handle success
-        return dataMessages;
-      })
+      const response = await this.axiosInstance.get(`/users/${username}`)
+      return response;
     } catch (err) {
       helpMeInstructor(err);
     }
   }
 
-  async createUser({ displayName, password }) {
+
+  async messageList() {
+    try {
+      const response = await this.axiosInstance.get("/messages?limit=100&offset=0")
+      return Object.keys(response.messages).map(key => response.messages[key])
+    } catch (err) {
+      helpMeInstructor(err);
+    }
+  }
+  //result = Object.keys(result.messages).map(key => result.messages[key])
+
+
+  async createUser({ username, displayName, password }) {
     try {
       await this.axiosInstance.post('/users', {
-        
+        username,
         displayName,
         password
       });
+
     } catch (err) {
 
+      helpMeInstructor(err);
       return err;
     }
   }
-
-
 
   async deleteUser(username) {
     try {
@@ -102,9 +111,11 @@ class API {
     }
   }
 
-  async putUserPicture(username) {
+  async putUserPicture(username, formData) {
     try {
-      await this.axiosInstance.put(`/users/${username}/picture`);
+      await this.axiosInstance.put(`/users/${username}/picture`,
+        formData
+      );
     } catch (err) {
       return err;
     }
@@ -120,7 +131,7 @@ class API {
     }
   }
 
-  async postlike({messageId}) {
+  async postlike({ messageId }) {
     try {
       await this.axiosInstance.post('/likes', {
         messageId
@@ -130,29 +141,14 @@ class API {
     }
   }
 
-  async deleteLike({likeId}) {
+  async deleteLike({ likeId }) {
     try {
       await this.axiosInstance.delete(`/likes/${likeId}`);
     } catch (err) {
       return err;
     }
   }
-
- 
-
-
-
-
 }
-
-
-    
-  
-
-  
-
-
-
 
 // WARNING.. do not touch below this line if you want to have a good day =]
 

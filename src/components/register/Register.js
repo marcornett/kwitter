@@ -1,97 +1,41 @@
 import React, { useState } from 'react';
 import ProptTypes from 'prop-types';
-
+import Loader from '../loader/Loader';
 import { Grid, Form, Segment, Button, Header, Message, Icon } from 'semantic-ui-react';
-import { Link } from 'react-router-dom';
-// import {} from '../../redux/actions/auth';
+import { Link, Redirect } from 'react-router-dom';
 
-// class Register extends Component {
-// 	constructor(props) {
-// 		super(props);
-// 		this.state = {
-// 			username: '',
-// 			displayName: '',
-// 			password: '',
-// 			passwordConfirmation: '',
-// 			loading: false,
-// 			errors: []
-// 		};
-// 	}
-
-export const Register = ({ register, loading, error }) => {
-	const [ state, setState ] = useState({
+export const Register = ({ register, error }) => {
+	const [ user, setUserState ] = useState({
+		username: '',
 		displayName: '',
 		password: '',
 		passwordConfirmation: '',
-		loading: false
+		error: [],
+		isSubmitted: false
 	});
-
-	//const displayErrors = (errors) => state.errors.map((error, idx) => <p key={idx}>{error.message}</p>);
-
-	const isNamesValid = ({ username, displayName }) => {
-		if (username.length < 3 || displayName.length < 3) {
-			return false;
-		}
-		if (username.length > 20 || displayName.length > 20) {
-			return false;
-		}
-
-		return true;
-	};
-
-	const isPasswordValid = ({ password, passwordConfirmation }) => {
-		if (password.length < 3 || passwordConfirmation.length < 3) {
-			return false;
-		}
-		if (password.length > 20 || passwordConfirmation.length > 20) {
-			return false;
-		}
-
-		return true;
-	};
-
-	const isFormEmpty = (state) => {
-		return (
-			!state.username.length ||
-			!state.displayName.length ||
-			!state.password.length ||
-			!state.passwordConfirmation.length
-		);
-	};
-
-	// const isFormValid = () => {
-	// 	let errors = [];
-	// 	let err;
-	// 	if (isFormEmpty(this.state)) {
-	// 		err = { message: 'Feilds cant be empty' };
-	// 		setState({ errors: errors.concat(err) });
-	// 		return false;
-	// 	} else if (!isNamesValid(this.state)) {
-	// 		err = { message: 'Names have to longer then 3 letters and shorter than 20' };
-	// 		setState({ errors: errors.concat(err) });
-	// 		return false;
-	// 	} else if (isPasswordValid(this.state)) {
-	// 		err = { message: 'Password is invalid' };
-	// 		setState({ errors: errors.concat(err) });
-	// 		return false;
-	// 	} else {
-	// 		return true;
-	// 	}
-	// };
 
 	const handleChange = (evt) => {
 		const inputName = evt.target.name;
 		const inputValue = evt.target.value;
-		setState((prevState) => ({ ...prevState, [inputName]: inputValue }));
+		setUserState((prevState) => ({ ...prevState, [inputName]: inputValue }));
 	};
 
-	const handleSubmit = async (evt) => {
+	const handleSubmit = (evt) => {
 		evt.preventDefault();
+		console.log({ user });
 
-		setState({ errors: [], loading: true });
-		// API.createUser(state);
-		register(state);
+		register(user);
+		setUserState({ isSubmitted: true });
+		setUserState({
+			username: '',
+			displayName: '',
+			password: '',
+			passwordConfirmation: '',
+			error: [],
+			isSubmitted: true
+		});
 	};
+
 	return (
 		<Grid textAlign="center" verticalAlign="middle" className="app">
 			<Grid.Column style={{ maxWidth: 450 }}>
@@ -102,46 +46,72 @@ export const Register = ({ register, loading, error }) => {
 				<Form onSubmit={handleSubmit} size="large">
 					<Segment stacked>
 						<Form.Input
+							required
 							fluid
+							name="username"
+							icon="user"
+							iconPosition="left"
+							placeholder="Display Name"
+							type="text"
+							value={user.username}
+							onChange={handleChange}
+						/>
+						<Form.Input
+							fluid
+							required
 							name="displayName"
 							icon="user"
 							iconPosition="left"
 							placeholder="Display Name"
 							type="text"
-							value={state.displayName}
+							value={user.displayName}
 							onChange={handleChange}
 						/>
 						<Form.Input
 							fluid
+							required
 							name="password"
 							icon="lock"
 							iconPosition="left"
 							placeholder="Password"
 							type="password"
-							value={state.password}
+							value={user.password}
 							onChange={handleChange}
 						/>
 
 						<Form.Input
 							fluid
+							required
 							name="passwordConfirmation"
 							icon="repeat"
 							iconPosition="left"
 							placeholder="Password Confirmation"
 							type="password"
-							value={state.passwordConfirmation}
+							value={user.passwordConfirmation}
 							onChange={handleChange}
 						/>
-						<Button disabled={loading} className={loading ? 'loading' : ''} color="blue" fluid size="large">
+						<Button
+							disabled={user.isSubmitted}
+							className={user.isSubmitted ? 'loading' : ''}
+							color="blue"
+							fluid
+							size="large"
+						>
 							Submit
 						</Button>
 					</Segment>
 				</Form>
-
+				{user.isSubmitted ? <Redirect to="/" /> : ''}
 				<Message>
 					Already a user? <Link to="/"> Sign In</Link>
 				</Message>
 			</Grid.Column>
 		</Grid>
 	);
+};
+
+Register.propTypes = {
+	register: ProptTypes.func.isRequired,
+	loading: ProptTypes.bool,
+	error: ProptTypes.string
 };
