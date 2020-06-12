@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { AboutMe } from './AboutMe';
 import { Button, Header, Image, Modal } from 'semantic-ui-react';
+import { AboutMeContainer } from '.';
 
 export const AboutMeModal = ({ pictureLocation, displayName }) => {
 	const [ isModalOpen, setModal ] = useState({
@@ -21,7 +22,7 @@ export const AboutMeModal = ({ pictureLocation, displayName }) => {
 				/>
 				<Modal.Description>
 					<Header>Hello {displayName}</Header>
-					<AboutMe />
+					<AboutMeContainer />
 				</Modal.Description>
 			</Modal.Content>
 			<Modal.Actions />
