@@ -22,12 +22,12 @@ export const getUser = (username) => async (dispatch, getState) => {
 	}
 };
 
-export const updateUser = (username) => async (dispatch, getState) => {
+export const updateUser = ({ displayName, password, about }) => async (dispatch, getState) => {
 	try {
-		const payload = await api.updateUser(username);
+		const payload = await api.updateUser({ displayName, password, about });
+		console.log(payload);
 		dispatch({ type: USER, payload });
 	} catch (err) {
-		console.log({ err });
 		dispatch({
 			type: USER_FAILURE,
 			payload: err.message
