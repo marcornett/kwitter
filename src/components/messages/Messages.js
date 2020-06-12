@@ -2,15 +2,11 @@ import React, { Component } from "react";
 import{ 
   Button,
   Card,
-  Divider,
   Grid,
   Header,
   Image,
   Label,
-  Icon,
-  Menu,
-  Segment,
-  Form }
+  Icon }
  from "semantic-ui-react";
 
 
@@ -22,9 +18,6 @@ class Messages extends Component {
         animation="overlay"
         icon="labeled"
         width="thin"
-        // inverted
-        // vertical
-       
         fluid
       >
         <Card.Content>

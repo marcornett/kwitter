@@ -2,9 +2,7 @@ import api from '../../utils/api';
 
 export const GET_MESSAGES = "GET_MESSAGES";
 export const GETMESSAGES_FAILED = "GETMESSAGES_FAILED";
-export const POSTMESSAGE = "POSTMESSAGE"
-export const POSTMESSAGE_SUCCESS = "POSTMESSAGE_SUCCESS"
-export const POSTMESSAGE_CHAR_FAIL = "POSTMESSAGE_CHAR_FAIL"
+export const ADD_LIKE = "ADD_LIKE"
 
 export const getMessages = () => async (dispatch, getState) => {
     try {
@@ -19,27 +17,11 @@ export const getMessages = () => async (dispatch, getState) => {
         payload: err.message
     })
 }}
-//Todo:(in progress) post a message action//
-export const postMessage = text => async (dispatch, getState) => {
+
+export const addLike = () => async (dispatch, getState) => {
     try {
-     const token=getState().auth.login.token
-     const payload = await api.postMessage(text)
-     dispatch({
-         type:POSTMESSAGE
-     })
-    } catch (err) {
+        const payload
         dispatch({
-            type:POSTMESSAGE_CHAR_FAIL
-        });
-     } finally {
-        dispatch({
-            type:POSTMESSAGE_SUCCESS,
-            payload: text
+            type:ADD_LIKE
         })
-     }
- };
-// update the state maybe ?
- export const updateAfterPosting = text => dispatch => {
-     return dispatch(postMessage(text))
-     .then(()=>dispatch(getMessages()))
- }
+    }
