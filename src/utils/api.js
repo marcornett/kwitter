@@ -105,7 +105,8 @@ class API {
   // Unsure how image data needs to be sent, check documentation on Kwitter API for PUT User Picture
   async getUserPicture(username) {
     try {
-      await this.axiosInstance.get(`/users/${username}/picture`);
+      const response = await this.axiosInstance.get(`/users/${username}/picture`);
+      return response
     } catch (err) {
       return err;
     }

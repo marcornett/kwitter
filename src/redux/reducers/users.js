@@ -1,4 +1,9 @@
-import { USER, USER_FAILURE, DELETE_USER, PUT_PICTURE_FAILURE } from "../actions"
+import {
+    USER,
+    USER_FAILURE,
+    DELETE_USER,
+    PUT_PICTURE_FAILURE,
+} from "../actions"
 
 const INITIAL_STATE = {
     username: "",
@@ -7,7 +12,7 @@ const INITIAL_STATE = {
     createdAt: "",
     updatedAt: "",
     pictureLocation: "",
-    googleId: ""
+    googleId: "",
 }
 
 export const usersReducer = (state = INITIAL_STATE, action) => {
