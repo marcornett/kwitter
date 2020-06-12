@@ -3,6 +3,7 @@ import api from '../../utils/api';
 export const GET_MESSAGES = "GET_MESSAGES";
 export const GETMESSAGES_FAILED = "GETMESSAGES_FAILED";
 export const ADD_LIKE = "ADD_LIKE"
+export const ADD_LIKE_FAIL = "ADD_LIKE_FAIL"
 
 export const getMessages = () => async (dispatch, getState) => {
     try {
@@ -18,10 +19,17 @@ export const getMessages = () => async (dispatch, getState) => {
     })
 }}
 
-export const addLike = () => async (dispatch, getState) => {
+export const addLike = (text) => async (dispatch, getState) => {
     try {
-        const payload
+        const payload = await api.postlike(text)
         dispatch({
-            type:ADD_LIKE
-        })
+            type:ADD_LIKE,
+            payload
+        });
+    } catch (err) {
+        dispatch({
+            type:ADD_LIKE_FAIL,
+            payload:err.message
+        });
     }
+}
