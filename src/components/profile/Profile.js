@@ -37,9 +37,9 @@ export const Profile = (props) => {
 			<button type="submit" onClick={handleDelete}>
 				Delete Profile
 			</button>
-			<div class="ui two column grid">
+			<div class="ui two column centered grid">
 				<div class="column">
-					<div class="ui segment left floated">
+					<div class="ui left floated">
 						<Card>
 							<Image
 								src={
@@ -77,13 +77,9 @@ export const Profile = (props) => {
 						</Card>
 					</div>
 				</div>
-				{/* <div class="column">
-					<div class="ui segment">
-						<div />
-					</div>
-				</div> */}
+
 				<div class="column center">
-					<div class="ui segment right floated">
+					<div class="ui  right floated">
 						<AboutMeContainer displayName={displayName} />
 					</div>
 				</div>
