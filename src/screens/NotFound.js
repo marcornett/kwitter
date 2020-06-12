@@ -1,15 +1,16 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import './NotFound.css'
+import { Card, Portal, Message } from "semantic-ui-react";
 
 const NotFound = ({ location }) => (
   <React.Fragment >
-    <div id='NotFoundContainer'>
-      <div id='NotFoundMessage'> 
-        <p>Page not found for {location.pathname}</p>
-        <Link to="/">Go Home</Link>
-      </div>
-   </div>
+    <Card id='NotFoundContainer'>
+      <Message id='NotFoundMessage'> 
+        <Message.Header>Page not found for {location.pathname}</Message.Header>
+        <Link to="/"> Go Home </Link>
+      </Message>
+   </Card>
   </React.Fragment>
 );
 

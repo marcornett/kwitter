@@ -8,7 +8,7 @@
 
 #NotFoundMessage{
    display: flex;
-   border: black solid 1px;
+  
    border-radius: 2%;
    width: 50%;
    height: 70px;
