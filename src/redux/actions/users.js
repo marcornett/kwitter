@@ -7,6 +7,7 @@ export const USER_FAILURE = 'USERS/USER_FAILURE';
 export const LOGOUT = 'AUTH/LOGOUT';
 export const PUT_PICTURE_FAILURE = 'USERS/PUT_PICTURE_FAILURE'
 
+
 export const getUser = (username) => async (dispatch, getState) => {
 	try {
 		const payload = await api.getUserInfo(username);
@@ -68,3 +69,4 @@ export const addUserPicture = (username, picture) => async (dispatch, getState) 
 		})
 	}
 }
+

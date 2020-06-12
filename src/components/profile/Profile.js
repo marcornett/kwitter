@@ -1,12 +1,13 @@
-import React, { useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 import './Profile.css';
 
 import { Button, Segment, Card, Image, Form } from 'semantic-ui-react'
 
 export const Profile = (props) => {
+    const [image, handleImageChange] = useState(true)
     useEffect(() => {
         props.getUser(props.username)
-    }, [props.pictureLocation]);
+    }, [image]);
 
     const {
         username,
@@ -15,7 +16,6 @@ export const Profile = (props) => {
         createdAt,
         updatedAt,
         pictureLocation
-        // googleId
     } = props;
 
     const handleDelete = (event) => {
@@ -28,13 +28,14 @@ export const Profile = (props) => {
         }
         return false
     }
-    const inputRef = React.createRef()
-
     const handleUpload = (event) => {
         const formElement = new FormData(event.target)
         props.addUserPicture(props.username, formElement)
+        handleImageChange(prevState => !prevState)
     }
-    console.log(props)
+
+    const inputRef = React.createRef()
+
     return (
         <React.Fragment>
             <div >

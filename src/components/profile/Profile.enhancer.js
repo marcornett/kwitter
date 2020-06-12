@@ -16,7 +16,7 @@ const mapStateToProps = (state) => ({
 const mapDispatchToProps = {
     getUser,
     deleteUser,
-    addUserPicture
+    addUserPicture,
 };
 
 export const enhancer = connect(mapStateToProps, mapDispatchToProps);
