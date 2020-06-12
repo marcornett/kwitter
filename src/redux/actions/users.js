@@ -53,7 +53,6 @@ export const deleteUser = (username) => async (dispatch, getState) => {
 		/**
      * Let the reducer know that we are logged out
      */
-<<<<<<< HEAD
 		dispatch({ type: LOGOUT });
 	}
 };
@@ -69,8 +68,3 @@ export const addUserPicture = (username, picture) => async (dispatch, getState) 
 		})
 	}
 }
-=======
-		dispatch({ type: LOGOUT });
-	}
-};
->>>>>>> wesley/GoogleSign
