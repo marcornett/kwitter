@@ -96,10 +96,18 @@ class API {
 		}
 	}
 
-	async updateUser({ username }) {
+	async updateUser({ password, about, displayName }) {
 		try {
-			await this.axiosInstance.PATCH(`/users/${username}`);
+			console.log({ password, about, displayName });
+			const response = await this.axiosInstance.PATCH(`/users/${displayName}`, {
+				password,
+				about,
+				displayName
+			});
+			
+			return response
 		} catch (err) {
+			console.log(err)
 			return err;
 		}
 	}
@@ -107,10 +115,10 @@ class API {
 	// Unsure how image data needs to be sent, check documentation on Kwitter API for PUT User Picture
 	async getUserPicture(username) {
 		try {
-			console.log(username)
+			console.log(username);
 			await this.axiosInstance.get(`/users/${username}/picture`);
 		} catch (err) {
-			console.log(err)
+			console.log(err);
 			return err;
 		}
 	}
