@@ -1,5 +1,5 @@
-import React, { useEffect } from 'react'
-import './Profile.css'
+import React, { useEffect } from 'react';
+import './Profile.css';
 
 import { Button, Segment, Card, Image, Form } from 'semantic-ui-react'
 
@@ -14,9 +14,9 @@ export const Profile = (props) => {
         about,
         createdAt,
         updatedAt,
-        pictureLocation,
+        pictureLocation
         // googleId
-    } = props
+    } = props;
 
     const handleDelete = (event) => {
         props.deleteUser(props.username)
