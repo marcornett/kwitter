@@ -37,7 +37,7 @@ export const Profile = (props) => {
 			<button type="submit" onClick={handleDelete}>
 				Delete Profile
 			</button>
-			<AboutMeModal displayName="displayName" />
+			<AboutMeModal />
 			<Card>
 				<Image
 					src={
