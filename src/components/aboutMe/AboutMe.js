@@ -1,18 +1,15 @@
 import React, { useState } from 'react';
-import ProptTypes from 'prop-types';
-import { updateUser } from '../../redux/actions/users';
-import { Grid, Form, Segment, Header, TextArea } from 'semantic-ui-react';
 
-export const AboutMe = () => {
+import { updateUser } from '../../redux/actions/users';
+import { Form } from 'semantic-ui-react';
+
+export const AboutMe = (props) => {
 	const [ user, updateAboutSection ] = useState({
-		username: '',
+		displayName: '',
 		password: '',
-		newAboutMe: ''
+		about: ''
 	});
-	const [ modal, setModal ] = useState({
-		open: false,
-		saved: false
-	});
+
 	const handleChange = (evt) => {
 		const inputName = evt.target.name;
 		const inputValue = evt.target.value;
@@ -21,23 +18,22 @@ export const AboutMe = () => {
 	};
 	const handleSubmit = (evt) => {
 		evt.preventDefault();
-		console.log(user);
 		updateUser(user);
 		updateAboutSection((prevState) => ({
 			...prevState,
-			username: '',
+			displayName: '',
 			password: '',
-			newAboutMe: ''
+			about: ''
 		}));
-		setModal((prevState) => ({ ...prevState, saved: true }));
 	};
+
 	return (
 		<Form onSubmit={handleSubmit}>
 			<Form.Group widths="equal">
 				<Form.Input
 					autoFocus
 					required
-					name="username"
+					name="displayName"
 					icon="user"
 					iconPosition="left"
 					placeholder="Username"
@@ -60,15 +56,11 @@ export const AboutMe = () => {
 			<Form.TextArea
 				placeholder="Tell us more..."
 				rows={3}
-				name="newAboutMe"
-				value={user.newAboutMe}
+				name="about"
+				value={user.about}
 				onChange={handleChange}
 			/>
 			<Form.Button>Submit</Form.Button>
 		</Form>
 	);
-};
-
-AboutMe.propTypes = {
-	newAboutMe: ProptTypes.string.isRequired
 };
