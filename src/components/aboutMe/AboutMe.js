@@ -1,5 +1,7 @@
 import React, { useState } from 'react';
-import { Grid, Form, Segment, Header } from 'semantic-ui-react';
+import ProptTypes from 'prop-types';
+import { updateUser } from '../../redux/actions/users';
+import { Grid, Form, Segment, Header, TextArea } from 'semantic-ui-react';
 
 export const AboutMe = () => {
 	const [ user, updateAboutSection ] = useState({
@@ -20,57 +22,53 @@ export const AboutMe = () => {
 	const handleSubmit = (evt) => {
 		evt.preventDefault();
 		console.log(user);
+		updateUser(user);
+		updateAboutSection((prevState) => ({
+			...prevState,
+			username: '',
+			password: '',
+			newAboutMe: ''
+		}));
 		setModal((prevState) => ({ ...prevState, saved: true }));
 	};
 	return (
-		<Grid textAlign="center" verticalAlign="middle" className="app">
-			<Grid.Column style={{ maxWidth: 450 }}>
-				{modal.saved ? <div>Saved!</div> : null}
-				<Header as="h2" textAlign="center">
-					About Me
-				</Header>
-				<Form onSubmit={handleSubmit} className="ui form">
-					<Segment stacked>
-						<Form.Input
-							required
-							transparent
-							size="large"
-							fluid
-							name="username"
-							icon="user"
-							iconPosition="left"
-							placeholder="Display Name"
-							type="text"
-							value={user.username}
-							onChange={handleChange}
-						/>
-						<Form className="field ui">
-							<textarea
-								required
-								fluid
-								rows="5"
-								placeholder="What do you want to say about yourself"
-								type="text"
-								value={user.newAboutMe}
-								onChange={handleChange}
-							/>
-
-							<Form.Input
-								fluid
-								required
-								name="password"
-								icon="lock"
-								iconPosition="left"
-								placeholder="Password"
-								type="password"
-								value={user.password}
-								onChange={handleChange}
-							/>
-						</Form>
-						<button className="ui fluid button">Update</button>
-					</Segment>
-				</Form>
-			</Grid.Column>
-		</Grid>
+		<Form onSubmit={handleSubmit}>
+			<Form.Group widths="equal">
+				<Form.Input
+					autoFocus
+					required
+					name="username"
+					icon="user"
+					iconPosition="left"
+					placeholder="Username"
+					type="text"
+					value={user.username}
+					onChange={handleChange}
+				/>
+				<Form.Input
+					autoFocus
+					required
+					name="password"
+					icon="lock"
+					iconPosition="left"
+					placeholder="Password"
+					type="password"
+					value={user.password}
+					onChange={handleChange}
+				/>
+			</Form.Group>
+			<Form.TextArea
+				placeholder="Tell us more..."
+				rows={3}
+				name="newAboutMe"
+				value={user.newAboutMe}
+				onChange={handleChange}
+			/>
+			<Form.Button>Submit</Form.Button>
+		</Form>
 	);
+};
+
+AboutMe.propTypes = {
+	newAboutMe: ProptTypes.string.isRequired
 };
