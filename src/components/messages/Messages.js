@@ -11,6 +11,7 @@ import{
 
 
 class Messages extends Component {
+  
   render() {
     return (
       <Card
@@ -20,6 +21,7 @@ class Messages extends Component {
         width="thin"
         fluid
       >
+        
         <Card.Content>
                 <Image
                   alt=""
@@ -33,7 +35,7 @@ class Messages extends Component {
               <Card.Description className="likes-dislikes">
                 <Card.Meta>
                   {/* add a like button !! TODO: implement adding a like to post funtionality !! */}
-                <Button color='twitter'>
+                <Button color='twitter' onClick={() => this.props.likeHandler(this.props.username)}>
                 <Icon name='heart' />
                   Like
                 </Button>

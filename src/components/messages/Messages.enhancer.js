@@ -1,5 +1,5 @@
 import { connect } from "react-redux";
-import { getMessages, addMessage } from "../../redux/actions/messages";
+import { getMessages, addLike} from "../../redux/actions/messages";
 
 // https://react-redux.js.org/using-react-redux/connect-mapstate#connect-extracting-data-with-mapstatetoprops
 const mapStateToProps = (state) => {
@@ -10,7 +10,7 @@ const mapStateToProps = (state) => {
 
 // https://react-redux.js.org/using-react-redux/connect-mapdispatch#connect-dispatching-actions-with-mapdispatchtoprops
 const mapDispatchToProps = {
-     getMessages, 
+     getMessages, addLike
 };
 
 export const enhancer = connect(mapStateToProps, mapDispatchToProps);

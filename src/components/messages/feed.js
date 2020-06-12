@@ -15,7 +15,9 @@ import{
 
 class FeedPage extends Component {
   //state = { text: "" };
-
+  likeHandler = (id) => {
+    this.props.addLike(id)
+  }
   addHandler = (event) => {
     if (event.key === "Enter") {
       this.props.addMessage(this.props.username, event.target.value)
@@ -71,8 +73,8 @@ class FeedPage extends Component {
                 <br/>
                 {(this.props.messages).map((message) => (
                   <Messages
+                    likeHandler={this.likeHandler}
                     username={message.username}
-                    //image={message.image}
                     text={message.text}
                     likes={message.likes}
                     createdAt={message.createdAt}

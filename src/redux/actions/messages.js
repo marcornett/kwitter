@@ -19,9 +19,9 @@ export const getMessages = () => async (dispatch, getState) => {
     })
 }}
 
-export const addLike = (text) => async (dispatch, getState) => {
+export const addLike = (username) => async (dispatch, getState) => {
     try {
-        const payload = await api.postlike(text)
+        const payload = await api.postlike(username)
         dispatch({
             type:ADD_LIKE,
             payload
