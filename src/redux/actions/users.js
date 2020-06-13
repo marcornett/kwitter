@@ -5,6 +5,7 @@ export const USER = 'USERS/USER';
 export const PROFILE_PICTURE = 'USERS/PROFILE_PICTURE';
 export const USER_FAILURE = 'USERS/USER_FAILURE';
 export const LOGOUT = 'AUTH/LOGOUT';
+export const PUT_PICTURE_FAILURE = 'USERS/PUT_PICTURE_FAILURE'
 
 export const getUser = (username) => async (dispatch, getState) => {
 	try {
@@ -22,10 +23,13 @@ export const getUser = (username) => async (dispatch, getState) => {
 	}
 };
 
-export const updateUser = ({ displayName, password, about }) => async (dispatch, getState) => {
+export const register = (credentials) => async (dispatch, getstate) => {
 	try {
-		const payload = await api.updateUser({ displayName, password, about });
-		console.log(payload);
+		dispatch({ type: USER });
+		const payload = await api.createUser(credentials);
+
+		//console.log({ result });
+
 		dispatch({ type: USER, payload });
 	} catch (err) {
 		dispatch({
@@ -52,3 +56,16 @@ export const deleteUser = (username) => async (dispatch, getState) => {
 		dispatch({ type: LOGOUT });
 	}
 };
+
+export const addUserPicture = (username, picture) => async (dispatch, getState) => {
+	try {
+		await api.putUserPicture(username, picture)
+
+	} catch (err) {
+		dispatch({
+			type: PUT_PICTURE_FAILURE,
+			payload: err.message
+		})
+	}
+}
+
