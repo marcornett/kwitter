@@ -1,5 +1,24 @@
-/* #login-form {
-  display: flex;
-  flex-direction: column;
-  max-width: 20em;
-} */
+.loginForm-container {
+  margin: 0 auto;
+}
+
+.loginForm {
+  min-width: 450px;
+  padding: 0px;
+}
+
+.ui .message {
+  text-align: center;
+}
+
+.ui.stacked.segment::after,
+.ui.stacked.segment::before,
+.ui.stacked.segments::after,
+.ui.stacked.segments::before {
+  background: blue;
+}
+
+@media (max-width: 1105px) {
+  .loginForm {
+  }
+}
