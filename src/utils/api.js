@@ -1,10 +1,10 @@
-import axios from "axios";
+import axios from 'axios';
 
 class API {
-  axiosInstance = null;
+	axiosInstance = null;
 
-  constructor() {
-    /* 
+	constructor() {
+		/* 
       🚨1 point EXTRA CREDIT 🚨 👉🏿 get the baseURL from the environment
       https://create-react-app.dev/docs/adding-custom-environment-variables/
     */
@@ -154,8 +154,8 @@ class API {
 // WARNING.. do not touch below this line if you want to have a good day =]
 
 function helpMeInstructor(err) {
-  console.info(
-    `
+	console.info(
+		`
     Did you hit CORRECT the endpoint?
     Did you send the CORRECT data?
     Did you make the CORRECT kind of request [GET/POST/PATCH/DELETE]?
@@ -163,8 +163,8 @@ function helpMeInstructor(err) {
     Check the Axios docs 👉🏿 https://github.com/axios/axios
     TODO: troll students
   `,
-    err
-  );
+		err
+	);
 }
 
 function getToken() {
