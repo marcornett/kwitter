@@ -19,17 +19,18 @@ export const getMessages = () => async (dispatch, getState) => {
     })
 }}
 
-export const addLike = (username) => async (dispatch, getState) => {
-    try {
-        const payload = await api.postlike(username)
-        dispatch({
-            type:ADD_LIKE,
-            payload
-        });
-    } catch (err) {
-        dispatch({
-            type:ADD_LIKE_FAIL,
-            payload:err.message
-        });
-    }
-}
+// export const addLike = (messageId) => async (dispatch, getState) => {
+//     try {
+//         const payload = await api.postlike(messageId)
+//         dispatch({
+//             type:ADD_LIKE,
+//             payload,
+//             messageId
+//         });
+//     } catch (err) {
+//         dispatch({
+//             type:ADD_LIKE_FAIL,
+//             payload:err.message
+//         });
+//     }
+// }

@@ -134,9 +134,10 @@ class API {
 
   async postlike({ messageId }) {
     try {
-      await this.axiosInstance.post('/likes', {
-        messageId
+      const response = await this.axiosInstance.post('/likes', {
+       messageId,
       });
+      return response
     } catch (err) {
       return err;
     }

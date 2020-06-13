@@ -23,11 +23,6 @@ class FeedPage extends Component {
       this.props.addMessage(this.props.username, event.target.value)
     }
   }
-  handlePostMessage = e => {
-    e.preventDefault();
-    this.props.postMessage(e.target);
-    //this.setState({ text: "" });
-  };
 
   handleChange = e => {
     this.setState({ [e.target.name]: e.target.value });
@@ -73,10 +68,11 @@ class FeedPage extends Component {
                 <br/>
                 {(this.props.messages).map((message) => (
                   <Messages
-                    likeHandler={this.likeHandler}
+                    // likeHandler={this.likeHandler}
                     username={message.username}
                     text={message.text}
                     likes={message.likes}
+                    messageId={message.id}
                     createdAt={message.createdAt}
                     key={Math.random() * 10000}
                   />

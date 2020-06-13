@@ -21,7 +21,7 @@ class Messages extends Component {
         width="thin"
         fluid
       >
-        
+        {/* {console.log(this.props.messageId)} */}
         <Card.Content>
                 <Image
                   alt=""
@@ -35,7 +35,7 @@ class Messages extends Component {
               <Card.Description className="likes-dislikes">
                 <Card.Meta>
                   {/* add a like button !! TODO: implement adding a like to post funtionality !! */}
-                <Button color='twitter' onClick={() => this.props.likeHandler(this.props.username)}>
+                <Button color='twitter'>
                 <Icon name='heart' />
                   Like
                 </Button>
