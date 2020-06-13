@@ -7,7 +7,7 @@
 .home_banner {
   width: 55%;
   height: 100vh;
-  background-color: rgb(48, 222, 0);
+  background-color: #21ba45;
   flex-shrink: 2;
   font-family: "Sriracha", cursive;
   display: flex;
