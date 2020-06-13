@@ -6,6 +6,5 @@ export const ProfileScreen = () => (
   <>
     <MenuContainer />
     <ProfileContainer />
-
   </>
 );
