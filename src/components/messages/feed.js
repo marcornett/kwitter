@@ -10,30 +10,27 @@ import{
   Image,
   Menu,
   Segment,
-  Form }
+  Form,
+  Icon,
+  Label }
  from "semantic-ui-react";
 
 class FeedPage extends Component {
-  //state = { text: "" };
   likeHandler = (id) => {
     this.props.addLike(id)
   }
-  addHandler = (event) => {
-    if (event.key === "Enter") {
-      this.props.addMessage(this.props.username, event.target.value)
-    }
+  removeLike = (id) => {
+    this.props.unLike(id)
   }
-
-  handleChange = e => {
-    this.setState({ [e.target.name]: e.target.value });
-  };
-
    componentDidMount() {
      this.props.getMessages();
    }
 
   render() {
-    return (
+    if (this.props.messages === null){ 
+      return <div></div>
+     } else {
+       return (
       <Grid>
         <Grid.Row centered columns={1}>
           <Grid.Column width={8} >
@@ -67,15 +64,40 @@ class FeedPage extends Component {
                 Your Feed
                 <br/>
                 {(this.props.messages).map((message) => (
-                  <Messages
-                    // likeHandler={this.likeHandler}
-                    username={message.username}
-                    text={message.text}
-                    likes={message.likes}
-                    messageId={message.id}
-                    createdAt={message.createdAt}
-                    key={Math.random() * 10000}
-                  />
+                  <Card
+                  color="black"
+                  animation="overlay"
+                  icon="labeled"
+                  width="thin"
+                  fluid
+                  > 
+
+                  <Card.Content>
+                          <Image
+                            alt=""
+                            src={message.image}
+                            style={{ maxHeight: "40px", maxWidth: "40px" }}
+                          />
+                        <Card.Description className="message-output">
+                           ~ {message.text}
+                        </Card.Description>
+                        <Card.Meta>@{message.username}</Card.Meta>
+                        <Card.Description className="likes-dislikes">
+                          <Card.Meta>
+                            {/* add a like button !! TODO: implement adding a like to post funtionality !! */}
+                          <Button color='twitter' onClick={(e) => this.props.addLike(e, message.id) || this.props.unLike(e, Object.keys(message.likes.id))}>
+                          <Icon name='heart' />
+                            Like
+                          </Button>
+                          <Label as='a' basic color='twitter' pointing='left'>
+                          {message.likes.length}
+                          </Label>
+                            {/* end of add a like button */}
+                            <p className='post-date'>Posted on {new Date(message.createdAt).toLocaleString()}</p>
+                          </Card.Meta>
+                        </Card.Description>
+                  </Card.Content>
+                </Card>
                 ))}
               </Header>
             </Segment>
@@ -83,6 +105,6 @@ class FeedPage extends Component {
         </Grid.Row>
       </Grid>
     );
-  }
+  }}
 }
 export default FeedPage

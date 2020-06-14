@@ -132,10 +132,10 @@ class API {
     }
   }
 
-  async postlike({ messageId }) {
+  async postlike(messageId) {
     try {
       const response = await this.axiosInstance.post('/likes', {
-       messageId,
+       messageId
       });
       return response
     } catch (err) {
@@ -145,12 +145,11 @@ class API {
 
   async deleteLike({ likeId }) {
     try {
-      await this.axiosInstance.delete(`/likes/${likeId}`);
+      const response = await this.axiosInstance.delete(`/likes/${likeId}`); 
+      return Object.keys(response.likes).map(key => response.likes[key])
     } catch (err) {
       return err;
-    }
-  }
-}
+  }}}
 
 // WARNING.. do not touch below this line if you want to have a good day =]
 
