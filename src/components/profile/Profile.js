@@ -18,9 +18,9 @@ export const Profile = (props) => {
         pictureLocation
     } = props;
 
-	const handleDelete = (event) => {
-		props.deleteUser(props.username);
-	};
+    const handleDelete = (event) => {
+        props.deleteUser(props.username);
+    };
 
     const hasImage = () => {
         if (props.pictureLocation) {
