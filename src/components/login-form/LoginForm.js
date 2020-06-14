@@ -8,7 +8,7 @@ import { Link } from 'react-router-dom';
 import { Grid, Form, Segment, Message, Header, Icon } from 'semantic-ui-react';
 import GoogleButton from '../googleButton/GoogleButton';
 
-export const LoginForm = ({ login, loading, error, getUser }) => {
+export const LoginForm = ({ login, loading, error }) => {
 	// Not to be confused with "this.setState" in classes
 	const [state, setState] = useState({
 		username: '',
@@ -18,9 +18,7 @@ export const LoginForm = ({ login, loading, error, getUser }) => {
 	const handleLogin = (event) => {
 		event.preventDefault();
 		login(state);
-		if (state.username) {
-			getUser(state.username)
-		}
+		// Needs to update Redux state
 	};
 
 	const handleChange = (event) => {
