@@ -25,12 +25,7 @@ export const getUser = (username) => async (dispatch, getState) => {
 
 export const register = (credentials) => async (dispatch, getstate) => {
 	try {
-		dispatch({ type: USER });
-		const payload = await api.createUser(credentials);
-
-		//console.log({ result });
-
-		dispatch({ type: USER, payload });
+		await api.createUser(credentials);
 	} catch (err) {
 		dispatch({
 			type: USER_FAILURE,
@@ -69,3 +64,17 @@ export const addUserPicture = (username, picture) => async (dispatch, getState) 
 	}
 }
 
+export const updateUser = (user, username) => async (dispatch, getState) => {
+	try {
+		const payload = await api.updateUser(user, username);
+		dispatch({
+			type: USER,
+			payload
+		});
+	} catch (err) {
+		dispatch({
+			type: USER_FAILURE,
+			payload: err.message
+		});
+	}
+};

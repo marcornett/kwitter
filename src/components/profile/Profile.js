@@ -1,7 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import './Profile.css';
+import { AboutMeContainer } from '../aboutMe'
 
-import { Button, Segment, Card, Image, Form } from 'semantic-ui-react'
+import { Button, Segment, Card, Image, Form, } from 'semantic-ui-react'
 
 export const Profile = (props) => {
     const [image, handleImageChange] = useState(true)
@@ -38,7 +39,7 @@ export const Profile = (props) => {
 
     return (
         <React.Fragment>
-            <div >
+            <div className="profile_aboutMe">
                 <Card id="card_component">
                     <Image src={
                         hasImage() ?
@@ -85,6 +86,9 @@ export const Profile = (props) => {
                     </Button>
                     </Segment>
                 </Card>
+                <div id="aboutMeContainer">
+                    <AboutMeContainer displayName={displayName} />
+                </div>
             </div>
         </React.Fragment>
     )

@@ -1,7 +1,9 @@
-import { GET_MESSAGES, POST_MESSAGE, POST_MESSAGE_FAIL } from "../actions"
+import { GET_MESSAGES, GETMESSAGES_FAILED } from "../actions"
+
 const initialState = {
-  messages: []
+  messages: [],
 };
+
 export const messagesReducer = (state = initialState, action) => {
   switch (action.type) {
     case GET_MESSAGES:
@@ -9,18 +11,9 @@ export const messagesReducer = (state = initialState, action) => {
         ...state,
         messages: action.payload
       }
-    case POST_MESSAGE:
-      return {
-        ...state,
-        messages: [...state.messages, action.payload.message]
-      }
-    case POST_MESSAGE_FAIL:
-      return {
-        ...initialState,
-        error: action.payload,
-      };
+    case GETMESSAGES_FAILED:
+      return state;
     default:
       return state;
   }
 };
-//current messages

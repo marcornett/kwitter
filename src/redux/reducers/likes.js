@@ -1,55 +1,27 @@
-import {
-    USER,
-    USER_FAILURE,
-    DELETE_USER,
-    PUT_PICTURE_FAILURE,
-} from "../actions"
+import { ADD_LIKE, ADD_LIKE_FAIL, UN_LIKE, UN_LIKE_FAIL } from "../actions"
 
-const INITIAL_STATE = {
-    id: 0,
-    username: '',
-    messageId: 0,
-    createdAt: ''
+const initialState = {
+    likes: [],
+    id: []
 }
 
-export const usersReducer = (state = INITIAL_STATE, action) => {
+export const likesReducer = (state = initialState, action) => {
     switch (action.type) {
-        case USER:
-            const {
-                username,
-                displayName,
-                about,
-                createdAt,
-                updatedAt,
-                pictureLocation,
-                googleId
-            } = action.payload.user
+        case ADD_LIKE:
             return {
                 ...state,
-                username,
-                displayName,
-                about,
-                createdAt,
-                updatedAt,
-                pictureLocation,
-                googleId
+                likes: action.payload,
             }
-        case USER_FAILURE:
+        case ADD_LIKE_FAIL:
+            return state
+        case UN_LIKE:
             return {
                 ...state,
-                error: action.payload
+                likes: action.payload,
             }
-        case DELETE_USER:
-            return {
-                ...INITIAL_STATE
-            }
-        case PUT_PICTURE_FAILURE:
-            return {
-                error: action.payload
-            }
+        case UN_LIKE_FAIL:
+            return state
         default:
             return state
     }
 }
-
-
