@@ -11,6 +11,7 @@ const mapStateToProps = (state) => ({
 	pictureLocation: state.user.pictureLocation,
 	googleId: state.user.googleId
 });
+//this enhancer
 
 // https://react-redux.js.org/using-react-redux/connect-mapdispatch#connect-dispatching-actions-with-mapdispatchtoprops
 const mapDispatchToProps = {
