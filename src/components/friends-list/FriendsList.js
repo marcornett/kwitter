@@ -9,16 +9,19 @@ class FriendsList extends React.Component {
 
        }
     }
+//possibly?
+    getFriendsList = () => {
+
+    }
     
  render(){
      return (
          <React.Fragment>
              <div id='friendsList-Container'>
                Your FriendsList
-               {(this.props./*users?*/ */).map((user) => (
+               {(this.props./*users?*/).map((user) => (
                   <Users
                     username={user.username}
-                    //image={user.image}
                     displayName={user.displayname}
                     about={user.about}
                     pictureLocation={user.pictureLocation}
@@ -32,11 +35,4 @@ class FriendsList extends React.Component {
      
  }
 
-} <img></img>
-                <div id="userNames">
-                    <p>{/*api.Users.username*/}</p>
-                    <p>{/*api.Users.displayName*/}</p>
-                </div>
-                <div>
-                    {/*api.User.about*/}
-                </div>
+} 
