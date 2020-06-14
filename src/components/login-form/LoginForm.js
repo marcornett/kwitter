@@ -18,9 +18,7 @@ export const LoginForm = ({ login, loading, error, getUser }) => {
 	const handleLogin = (event) => {
 		event.preventDefault();
 		login(state);
-		if (state.username) {
-			getUser(state.username)
-		}
+		getUser(state.username)
 	};
 
 	const handleChange = (event) => {

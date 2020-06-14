@@ -64,9 +64,10 @@ export const addUserPicture = (username, picture) => async (dispatch, getState) 
 	}
 }
 
-export const updateUser = (user, username) => async (dispatch, getState) => {
+export const updateUser = ({ password, about, displayName }, username) => async (dispatch, getState) => {
+	console.log('test')
 	try {
-		const payload = await api.updateUser(user, username);
+		const payload = await api.updateUser({ password, about, displayName }, username);
 		dispatch({
 			type: USER,
 			payload

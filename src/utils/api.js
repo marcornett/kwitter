@@ -131,9 +131,10 @@ class API {
 
   async postlike(messageId) {
     try {
-      await this.axiosInstance.post('/likes', {
+      const response = await this.axiosInstance.post('/likes', {
         messageId
       });
+      return response
     } catch (err) {
       return err;
     }
@@ -148,10 +149,10 @@ class API {
     }
   }
 
-  async updateUser(user, username) {
+  async updateUser({ password, about, displayName }, username) {
     try {
       const response = await this.axiosInstance.patch(`/users/${username}`,
-        user
+        { password, about, displayName }
       );
       return response
     } catch (err) {

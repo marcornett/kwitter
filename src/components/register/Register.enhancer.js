@@ -14,8 +14,8 @@ const mapStateToProps = (state) => ({
 });
 
 const mapDispatchToProps = {
+	getUser,
 	register,
-	getUser
 };
 
 export const enhancer = connect(mapStateToProps, mapDispatchToProps);

@@ -1,9 +1,7 @@
 import React, { useState } from 'react';
-
-import { updateUser } from '../../redux/actions/users';
 import { Form } from 'semantic-ui-react';
 
-export const AboutMe = (props) => {
+export const AboutMe = ({ username, updateUser }) => {
 	const [user, updateAboutSection] = useState({
 		displayName: '',
 		password: '',
@@ -18,7 +16,12 @@ export const AboutMe = (props) => {
 	};
 	const handleSubmit = (evt) => {
 		evt.preventDefault();
-		updateUser(user);
+		updateUser({
+			password: user.password,
+			about: user.about,
+			displayName: user.displayName
+		},
+			username);
 		updateAboutSection((prevState) => ({
 			...prevState,
 			displayName: '',
@@ -36,9 +39,9 @@ export const AboutMe = (props) => {
 					name="displayName"
 					icon="user"
 					iconPosition="left"
-					placeholder="Username"
+					placeholder="Display Name"
 					type="text"
-					value={user.username}
+					value={user.displayName}
 					onChange={handleChange}
 				/>
 				<Form.Input
