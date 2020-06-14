@@ -1,82 +1,76 @@
-import React, { useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 import './Profile.css';
 
-import { Container, Grid, Button, Segment, Card, Icon, Image } from 'semantic-ui-react';
-import { AboutMeContainer } from '../aboutMe';
+import { Button, Segment, Card, Image, Form } from 'semantic-ui-react'
 
 export const Profile = (props) => {
-	useEffect(() => {
-		props.getUser(props.username);
-	});
+    const [image, handleImageChange] = useState(true)
+    useEffect(() => {
+        props.getUser(props.username)
+    }, [image]);
+
+    const {
+        username,
+        displayName,
+        about,
+        createdAt,
+        updatedAt,
+        pictureLocation
+    } = props;
 
 	const handleDelete = (event) => {
 		props.deleteUser(props.username);
 	};
 
-	const hasImage = () => {
-		if (pictureLocation) {
-			return pictureLocation;
-		}
-		return false;
-	};
+    const hasImage = () => {
+        if (props.pictureLocation) {
+            return true
+        }
+        return false
+    }
+    const handleUpload = (event) => {
+        const formElement = new FormData(event.target)
+        props.addUserPicture(props.username, formElement)
+        handleImageChange(prevState => !prevState)
+    }
 
-	const {
-		username,
-		displayName,
-		about,
-		createdAt,
-		updatedAt,
-		pictureLocation
-		// googleId
-	} = props;
+    const inputRef = React.createRef()
 
-	return (
-		<Container>
-			<button type="submit">Choose File</button>
-			<button type="submit">Update Image</button>
-			<button type="submit" onClick={handleDelete}>
-				Delete Profile
-			</button>
-			<div class="ui two column centered grid">
-				<div class="column">
-					<div class="ui left floated">
-						<Card>
-							<Image
-								src={
-									hasImage() ? (
-										hasImage
-									) : (
-										'https://3.bp.blogspot.com/-qDc5kIFIhb8/UoJEpGN9DmI/AAAAAAABl1s/BfP6FcBY1R8/s1600/BlueHead.jpg'
-									)
-								}
-								wrapped
-								ui={false}
-							/>
-							<Card.Content>
-								<Card.Header>{displayName}</Card.Header>
-								<Card.Meta>
-									<span className="date">{username}</span>
-								</Card.Meta>
-								<Card.Meta>
-									<span className="date">Joined in {createdAt}</span>
-								</Card.Meta>
-
-								<Card.Description>{about}</Card.Description>
-							</Card.Content>
-							<Card.Content extra>
-								<a>
-									<Icon name="hand point right outline" />
-									<span className="date">Updated at {updatedAt}</span>
-								</a>
-							</Card.Content>
-							<Segment inverted>
-								<Button onClick={handleDelete} inverted color="red">
-									Delete Profile
-								</Button>
-							</Segment>
-						</Card>
-					</div>
-				</div>
+    return (
+        <React.Fragment>
+            <div >
+                <Card id="card_component">
+                    <Image src={
+                        hasImage() ?
+                            `https://kwitter-api.herokuapp.com${pictureLocation}`
+                            :
+                            'https://3.bp.blogspot.com/-qDc5kIFIhb8/UoJEpGN9DmI/AAAAAAABl1s/BfP6FcBY1R8/s1600/BlueHead.jpg'
+                    }
+                        wrapped ui={false}
+                    />
+                    <Form id="image_form" onSubmit={handleUpload}>
+                        <Button
+                            content="Choose File"
+                            icon="file"
+                            labelPosition="left"
+                            onClick={() => inputRef.current.click()}
+                        />
+                        <Button type="submit" >
+                            Update Image
+                            </Button>
+                        <input
+                            type="file"
+                            ref={inputRef}
+                            hidden
+                            name="picture"
+                        />
+                    </Form>
+                    <Card.Content>
+                        <Card.Header>{displayName}</Card.Header>
+                        <Card.Meta>
+                            <span className='date'>{username}</span>
+                            <span className='date'>joined on {new Date(createdAt).toLocaleDateString()}</span>
+                        </Card.Meta>
 
 				<div class="column center">
 					<div class="ui  right floated">

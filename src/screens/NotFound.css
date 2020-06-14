@@ -1,0 +1,20 @@
+#NotFoundContainer{
+    display: flex;
+    justify-content: center;
+    margin: 0 auto;
+    width: 80%;
+    height: 500px;
+    
+}
+
+#NotFoundMessage{
+   display: flex;
+   border-radius: 2%;
+   width: 50%;
+   height: 70px;
+   justify-content: center;
+   align-items: center;
+   margin: 0 auto;
+   flex-direction: column;
+}
+

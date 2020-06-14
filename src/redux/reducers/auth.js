@@ -1,4 +1,4 @@
-import { LOGIN, LOGIN_SUCCESS, LOGIN_FAILURE, LOGOUT } from '../actions';
+import { LOGIN, LOGIN_SUCCESS, LOGIN_FAILURE, LOGOUT, DELETE_USER } from '../actions';
 
 // INITIAL STATE
 const INITIAL_STATE = {
@@ -32,6 +32,11 @@ export const authReducer = (state = INITIAL_STATE, action) => {
 			return {
 				...INITIAL_STATE
 			};
+		case DELETE_USER:
+			return {
+				...INITIAL_STATE,
+				isAuthenticated: false,
+			}
 		default:
 			return state;
 	}
