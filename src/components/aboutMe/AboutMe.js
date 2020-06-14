@@ -63,7 +63,7 @@ export const AboutMe = ({ displayName }) => {
 							value={user.about}
 							onChange={handleChange}
 						/>
-						<Form.Button>Submit</Form.Button>
+						<Form.Button>Update!</Form.Button>
 					</Segment>
 				</Form>
 			</Grid.Column>

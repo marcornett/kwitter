@@ -72,20 +72,13 @@ export const Profile = (props) => {
                             <span className='date'>joined on {new Date(createdAt).toLocaleDateString()}</span>
                         </Card.Meta>
 
-                        <Card.Description>
-                            <strong>Bio: </strong>{about}
-                        </Card.Description>
-                    </Card.Content>
-                    <Card.Content extra>
-                        <span className='date'>Updated on {new Date(updatedAt).toLocaleDateString()}</span>
-                    </Card.Content>
-                    <Segment inverted>
-                        <Button onClick={handleDelete} inverted color='red'>
-                            Delete Profile
-                    </Button>
-                    </Segment>
-                </Card>
-            </div>
-        </React.Fragment>
-    )
-}
+				<div class="column center">
+					<div class="ui  right floated">
+						{/* Update About me section */}
+						<AboutMeContainer displayName={displayName} />
+					</div>
+				</div>
+			</div>
+		</Container>
+	);
+};
