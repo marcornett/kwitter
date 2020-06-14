@@ -16,6 +16,7 @@ export const AboutMe = ({ displayName }) => {
 		updateAboutSection((prevState) => ({ ...prevState, [inputName]: inputValue }));
 		//updateAboutSection((prevState) => ({ ...prevState, newAboutMe: evt.target.value }));
 	};
+
 	const handleSubmit = (evt) => {
 		evt.preventDefault();
 		console.log(user);
