@@ -75,12 +75,10 @@ export const Profile = (props) => {
 				<div class="column center">
 					<div class="ui  right floated">
 						{/* Update About me section */}
-						{/* <AboutMeContainer displayName={displayName} /> */}
+						<AboutMeContainer displayName={displayName} />
 					</div>
 				</div>
-                </Card.Content>
-        </Card>
-        </div>
-	</React.Fragment>
-    )
-}
+			</div>
+		</Container>
+	);
+};

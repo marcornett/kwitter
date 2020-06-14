@@ -16,8 +16,12 @@ const mapStateToProps = (state) => ({
 
 // https://react-redux.js.org/using-react-redux/connect-mapdispatch#connect-dispatching-actions-with-mapdispatchtoprops
 const mapDispatchToProps = {
+<<<<<<< HEAD
 	//register,
-	//getUser
+	getUser
+=======
+	//register
+>>>>>>> master
 };
 
 export const enhancer = connect(mapStateToProps, mapDispatchToProps);
