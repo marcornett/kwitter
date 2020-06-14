@@ -1,7 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import './Profile.css';
+import { AboutMeContainer } from '../aboutMe'
 
-import { Button, Segment, Card, Image, Form } from 'semantic-ui-react'
+import { Button, Segment, Card, Image, Form, } from 'semantic-ui-react'
 
 export const Profile = (props) => {
     const [image, handleImageChange] = useState(true)
@@ -18,9 +19,9 @@ export const Profile = (props) => {
         pictureLocation
     } = props;
 
-	const handleDelete = (event) => {
-		props.deleteUser(props.username);
-	};
+    const handleDelete = (event) => {
+        props.deleteUser(props.username);
+    };
 
     const hasImage = () => {
         if (props.pictureLocation) {
@@ -38,7 +39,7 @@ export const Profile = (props) => {
 
     return (
         <React.Fragment>
-            <div >
+            <div className="profile_aboutMe">
                 <Card id="card_component">
                     <Image src={
                         hasImage() ?
@@ -72,13 +73,23 @@ export const Profile = (props) => {
                             <span className='date'>joined on {new Date(createdAt).toLocaleDateString()}</span>
                         </Card.Meta>
 
-				<div class="column center">
-					<div class="ui  right floated">
-						{/* Update About me section */}
-						<AboutMeContainer displayName={displayName} />
-					</div>
-				</div>
-			</div>
-		</Container>
-	);
-};
+                        <Card.Description>
+                            <strong>Bio: </strong>{about}
+                        </Card.Description>
+                    </Card.Content>
+                    <Card.Content extra>
+                        <span className='date'>Updated on {new Date(updatedAt).toLocaleDateString()}</span>
+                    </Card.Content>
+                    <Segment inverted>
+                        <Button onClick={handleDelete} inverted color='red'>
+                            Delete Profile
+                    </Button>
+                    </Segment>
+                </Card>
+                <div id="aboutMeContainer">
+                    <AboutMeContainer displayName={displayName} />
+                </div>
+            </div>
+        </React.Fragment>
+    )
+}
