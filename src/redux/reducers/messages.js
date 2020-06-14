@@ -1,4 +1,4 @@
-import { GET_MESSAGES, GETMESSAGES_FAILED } from "../actions"
+import { GET_MESSAGES, GETMESSAGES_FAILED, POSTMESSAGE, POSTMESSAGE_SUCCESS } from "../actions"
 
 const initialState = {
   messages: [],
@@ -13,6 +13,14 @@ export const messagesReducer = (state = initialState, action) => {
       }
     case GETMESSAGES_FAILED:
       return state;
+    case POSTMESSAGE:
+      return {
+        ...state,
+        messages: [...state.messages, action.payload]
+      }
+    case POSTMESSAGE_SUCCESS:
+      return state
+
     default:
       return state;
   }
