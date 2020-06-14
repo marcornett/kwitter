@@ -23,9 +23,6 @@ export const Menu = ({ isAuthenticated, logout }) => {
             Logout
           </NavLink>
           </div>
-
-
-
         </div>
       )}
     </div>

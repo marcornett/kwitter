@@ -1,24 +1,19 @@
-// TODO: implement
-import {GET_MESSAGES, GETMESSAGES_FAILED, POSTMESSAGE, POSTMESSAGE_SUCCESS} from "../actions"
+import { GET_MESSAGES, GETMESSAGES_FAILED } from "../actions"
+
 const initialState = {
   messages: [],
 };
+
 export const messagesReducer = (state = initialState, action) => {
   switch (action.type) {
     case GET_MESSAGES:
-    return {
-      ...state,
-      messages: action.payload
-    }
-    case POSTMESSAGE:
       return {
         ...state,
-        messages: [...state.messages, action.payload]
+        messages: action.payload
       }
-    case POSTMESSAGE_SUCCESS:
-      return state
+    case GETMESSAGES_FAILED:
+      return state;
     default:
       return state;
   }
 };
-//current messages

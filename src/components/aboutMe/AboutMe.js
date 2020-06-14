@@ -1,10 +1,8 @@
 import React, { useState } from 'react';
+import { Form } from 'semantic-ui-react';
 
-import { updateUser } from '../../redux/actions/users';
-import { Grid, Segment, Form } from 'semantic-ui-react';
-
-export const AboutMe = ({ displayName }) => {
-	const [ user, updateAboutSection ] = useState({
+export const AboutMe = ({ username, updateUser }) => {
+	const [user, updateAboutSection] = useState({
 		displayName: '',
 		password: '',
 		about: ''
@@ -19,8 +17,12 @@ export const AboutMe = ({ displayName }) => {
 
 	const handleSubmit = (evt) => {
 		evt.preventDefault();
-		console.log(user);
-		updateUser(user);
+		updateUser({
+			password: user.password,
+			about: user.about,
+			displayName: user.displayName
+		},
+			username);
 		updateAboutSection((prevState) => ({
 			...prevState,
 			displayName: '',
@@ -30,44 +32,39 @@ export const AboutMe = ({ displayName }) => {
 	};
 
 	return (
-		<Grid>
-			<Grid.Column style={{ maxWidth: 450 }}>
-				<Form onSubmit={handleSubmit}>
-					<Segment stacked>
-						<Form.Input
-							autoFocus
-							required
-							name="displayName"
-							icon="user"
-							iconPosition="left"
-							placeholder={`${displayName}`}
-							type="text"
-							value={user.username}
-							onChange={handleChange}
-						/>
-						<Form.Input
-							autoFocus
-							required
-							name="password"
-							icon="lock"
-							iconPosition="left"
-							placeholder="Password"
-							type="password"
-							value={user.password}
-							onChange={handleChange}
-						/>
-
-						<Form.TextArea
-							placeholder="Tell us more..."
-							rows={3}
-							name="about"
-							value={user.about}
-							onChange={handleChange}
-						/>
-						<Form.Button>Update!</Form.Button>
-					</Segment>
-				</Form>
-			</Grid.Column>
-		</Grid>
+		<Form onSubmit={handleSubmit}>
+			<Form.Group widths="equal">
+				<Form.Input
+					autoFocus
+					required
+					name="displayName"
+					icon="user"
+					iconPosition="left"
+					placeholder="Display Name"
+					type="text"
+					value={user.displayName}
+					onChange={handleChange}
+				/>
+				<Form.Input
+					autoFocus
+					required
+					name="password"
+					icon="lock"
+					iconPosition="left"
+					placeholder="Password"
+					type="password"
+					value={user.password}
+					onChange={handleChange}
+				/>
+			</Form.Group>
+			<Form.TextArea
+				placeholder="Tell us more..."
+				rows={3}
+				name="about"
+				value={user.about}
+				onChange={handleChange}
+			/>
+			<Form.Button>Submit</Form.Button>
+		</Form>
 	);
 };

@@ -11,13 +11,6 @@
   text-align: center;
 }
 
-.ui.stacked.segment::after,
-.ui.stacked.segment::before,
-.ui.stacked.segments::after,
-.ui.stacked.segments::before {
-  background: blue;
-}
-
 @media (max-width: 1105px) {
   .loginForm {
   }

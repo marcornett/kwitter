@@ -1,25 +1,25 @@
 import React from 'react';
 
-class Users extends React.Component{
-    constructor(props){
+class Users extends React.Component {
+    constructor(props) {
         super(props);
 
-        this.state ={
+        this.state = {
 
         }
     }
 
-    render(){
-        return(
+    render() {
+        return (
             <React.Fragment>
                 <div id='usersContainer'>
                     <img> {this.props.pictureLocation} </img>
-                <div id="userNames">
-                    <p> {this.props.username} </p>
-                    <p> {this.props.displayName} </p>
-                </div>
+                    <div id="userNames">
+                        <p> {this.props.username} </p>
+                        <p> {this.props.displayName} </p>
+                    </div>
 
-                <div> {this.props.about} </div>
+                    <div> {this.props.about} </div>
                 </div>
             </React.Fragment>
         )

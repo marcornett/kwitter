@@ -5,7 +5,7 @@ import { Grid, Form, Segment, Button, Header, Message, Icon } from 'semantic-ui-
 import { Link, Redirect } from 'react-router-dom';
 
 export const Register = ({ register, error }) => {
-	const [ user, setUserState ] = useState({
+	const [user, setUserState] = useState({
 		username: '',
 		displayName: '',
 		password: '',
@@ -24,7 +24,11 @@ export const Register = ({ register, error }) => {
 		evt.preventDefault();
 		console.log({ user });
 
-		register(user);
+		register({
+			username: user.username,
+			displayName: user.displayName,
+			password: user.password
+		});
 		setUserState({ isSubmitted: true });
 		setUserState({
 			username: '',
