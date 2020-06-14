@@ -1,0 +1,27 @@
+@import url("https://fonts.googleapis.com/css2?family=Sriracha&display=swap");
+
+* {
+  box-sizing: border-box;
+}
+
+.home_banner {
+  width: 55%;
+  height: 100vh;
+  background-color: #21ba45;
+  flex-shrink: 2;
+  font-family: "Sriracha", cursive;
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+}
+
+.logo {
+  font-size: 12vw;
+  padding-right: 60px;
+  color: #f0f0f0;
+}
+
+@media (max-width: 1105px) {
+  .home_banner {
+  }
+}

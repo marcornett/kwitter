@@ -59,7 +59,7 @@ class FeedPage extends Component {
                 </Button>
               </Form>
               <Divider />
-
+{/* {console.log(this.props.messages)} */}
               <Header as="h1" textAlign="center">
                 Your Feed
                 <br/>
@@ -85,7 +85,7 @@ class FeedPage extends Component {
                         <Card.Description className="likes-dislikes">
                           <Card.Meta>
                             {/* add a like button !! TODO: implement adding a like to post funtionality !! */}
-                          <Button color='twitter' onClick={(e) => this.props.addLike(e, message.id) || this.props.unLike(e, Object.keys(message.likes.id))}>
+                          <Button color='twitter' onClick={(e) => this.props.addLike(e, message.id) || this.props.unLike(e, message.likes.id)}>
                           <Icon name='heart' />
                             Like
                           </Button>

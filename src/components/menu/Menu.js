@@ -1,19 +1,31 @@
 import React from "react";
 import ProptTypes from "prop-types";
-import { Link } from "react-router-dom";
+import { NavLink } from "react-router-dom";
 import "./Menu.css";
+import { Icon } from 'semantic-ui-react';
+
 
 export const Menu = ({ isAuthenticated, logout }) => {
   return (
     <div id="menu">
-      <h1>Kwitter</h1>
+      <h1>Leafy<Icon id="leaf" name="leaf" style={{ padding: "5px" }} /></h1>
       {isAuthenticated && (
         <div id="menu-links">
-          <Link to="/profiles/:username">Profile</Link>
-          <Link to="/messages">Message Feed</Link>
-          <Link to="/" onClick={logout}>
+          <div><NavLink to="/messages"
+            activeStyle={{
+              fontWeight: "bold",
+            }}>Message Feed</NavLink></div>
+          <div><NavLink to="/profiles/:username"
+            activeStyle={{
+              fontWeight: "bold",
+            }}>Profile</NavLink></div>
+          <div><NavLink to="/" onClick={logout}>
             Logout
-          </Link>
+          </NavLink>
+          </div>
+
+
+
         </div>
       )}
     </div>
@@ -22,7 +34,7 @@ export const Menu = ({ isAuthenticated, logout }) => {
 
 Menu.defaultProps = {
   isAuthenticated: false,
-  logout: () => {},
+  logout: () => { },
 };
 
 Menu.propTypes = {

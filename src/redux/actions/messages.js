@@ -46,7 +46,6 @@ export const unLike = (e, LikeId) => async (dispatch, getState) => {
             payload,
             LikeId
         });
-        dispatch(addLike())
         dispatch(getMessages())
     } catch (err) {
         dispatch({
