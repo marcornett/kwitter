@@ -1,9 +1,9 @@
 import axios from 'axios';
 
 class API {
-	axiosInstance = null;
+  axiosInstance = null;
 
-	constructor() {
+  constructor() {
 		/* 
       🚨1 point EXTRA CREDIT 🚨 👉🏿 get the baseURL from the environment
       https://create-react-app.dev/docs/adding-custom-environment-variables/
@@ -79,16 +79,12 @@ class API {
   //result = Object.keys(result.messages).map(key => result.messages[key])
 
 
-  async createUser({ username, displayName, password }) {
+  async createUser(user) {
     try {
-      await this.axiosInstance.post('/users', {
-        username,
-        displayName,
-        password
-      });
-
+      await this.axiosInstance.post('/users',
+        user
+      );
     } catch (err) {
-
       helpMeInstructor(err);
       return err;
     }
@@ -122,11 +118,12 @@ class API {
     }
   }
 
-  async postMessage({ text }) {
+  async postMessage(text) {
     try {
-      await this.axiosInstance.post('/messages', {
+      const response = await this.axiosInstance.post('/messages',
         text
-      });
+      );
+      return response
     } catch (err) {
       return err;
     }
@@ -135,7 +132,7 @@ class API {
   async postlike(messageId) {
     try {
       const response = await this.axiosInstance.post('/likes', {
-       messageId
+        messageId
       });
       return response
     } catch (err) {
@@ -145,17 +142,32 @@ class API {
 
   async deleteLike({ likeId }) {
     try {
-      const response = await this.axiosInstance.delete(`/likes/${likeId}`); 
+      const response = await this.axiosInstance.delete(`/likes/${likeId}`);
       return Object.keys(response.likes).map(key => response.likes[key])
     } catch (err) {
       return err;
-  }}}
+    }
+  }
+
+  async updateUser({ password, about, displayName }, username) {
+    try {
+      const response = await this.axiosInstance.patch(`/users/${username}`,
+        { password, about, displayName }
+      );
+      return response
+    } catch (err) {
+      console.log(err)
+      return err;
+    }
+  }
+}
+
 
 // WARNING.. do not touch below this line if you want to have a good day =]
 
 function helpMeInstructor(err) {
-	console.info(
-		`
+  console.info(
+    `
     Did you hit CORRECT the endpoint?
     Did you send the CORRECT data?
     Did you make the CORRECT kind of request [GET/POST/PATCH/DELETE]?
@@ -163,8 +175,8 @@ function helpMeInstructor(err) {
     Check the Axios docs 👉🏿 https://github.com/axios/axios
     TODO: troll students
   `,
-		err
-	);
+    err
+  );
 }
 
 function getToken() {
