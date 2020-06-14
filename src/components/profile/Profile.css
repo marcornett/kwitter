@@ -10,17 +10,3 @@
   margin-top: 10px;
   margin-bottom: 10px;
 }
-
-.profile_aboutMe {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-
-#card_component {
-  margin-right: 30px;
-}
-
-#aboutMeContainer {
-  margin-left: 30px;
-}

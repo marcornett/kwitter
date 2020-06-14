@@ -1,6 +1,7 @@
 import { connect } from 'react-redux';
-import { register, getUser } from '../../redux/actions/users';
+//import { register } from '../../redux/actions/users';
 
+// https://react-redux.js.org/using-react-redux/connect-mapstate#connect-extracting-data-with-mapstatetoprops
 const mapStateToProps = (state) => ({
 	loading: state.auth.loading,
 	error: state.auth.error,
@@ -13,9 +14,14 @@ const mapStateToProps = (state) => ({
 	googleId: state.user.googleId
 });
 
+// https://react-redux.js.org/using-react-redux/connect-mapdispatch#connect-dispatching-actions-with-mapdispatchtoprops
 const mapDispatchToProps = {
-	getUser,
-	register,
+<<<<<<< HEAD
+	//register,
+	getUser
+=======
+	//register
+>>>>>>> master
 };
 
 export const enhancer = connect(mapStateToProps, mapDispatchToProps);
