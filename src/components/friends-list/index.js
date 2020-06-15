@@ -35,15 +35,16 @@ class FriendsList extends React.Component {
                                     }
                                     />
                                     <List.Content>
-                                        <List.Header as='a'>{user.displayName}</List.Header>
+                                        <List.Header id="displayName" as='a'>{user.displayName}</List.Header>
                                         <List.Description>
                                             Last seen on at
-                                            <a>
+                                            <a id="date">
                                                 <b> {new Date(user.updatedAt).toLocaleDateString()}</b>
                                             </a>{' '}.
                                         </List.Description>
                                     </List.Content>
                                 </List.Item>
+                                <br />
                             </List>
                         </div>
                     ))}
