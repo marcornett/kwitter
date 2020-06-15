@@ -13,3 +13,9 @@
 .ui.avatar.image {
   margin-right: 30px;
 }
+
+#mainFeed {
+  width: 50%;
+  max-width: 537px;
+  margin-right: 50px;
+}
