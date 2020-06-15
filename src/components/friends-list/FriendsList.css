@@ -1,0 +1,27 @@
+#friendTitle {
+  margin-left: 50px;
+  color: #21ba45;
+}
+
+#friendsList-Container {
+  margin-left: 50px;
+  overflow-y: scroll;
+  height: 400px;
+  width: 320px;
+  font-size: 20px;
+  border-radius: 0.28571429rem;
+  border: 1px solid rgba(34, 36, 38, 0.15);
+  padding: 10px;
+}
+
+#usersContainer {
+  margin-bottom: 10px;
+}
+
+a#displayName.header {
+  color: #21ba45 !important;
+}
+
+#date {
+  color: #21ba45;
+}

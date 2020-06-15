@@ -6,3 +6,4 @@ export * from './register';
 export * from './profile'
 export * from './messages'
 export * from './home-banner'
+export * from './friends-list'
