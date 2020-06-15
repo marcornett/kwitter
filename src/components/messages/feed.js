@@ -37,7 +37,7 @@ class FeedPage extends React.Component {
       <Grid>
         <Grid.Row centered columns={1}>
           <Grid.Column width={6} >
-            <Segment >
+            <Segment basic>
               <Post_InputEnhanced />
               <Header as="h1" textAlign="center">
                 Your Feed
@@ -74,7 +74,7 @@ class FeedPage extends React.Component {
                         <Label as='a' basic pointing='left'>
                           {message.likes.length}
                         </Label>
-                        <p className='postDate'>{new Date(message.createdAt).toLocaleString()}</p>
+                        <p className='postDate'>Posted on{new Date(message.createdAt).toLocaleString()}</p>
                       </Card.Meta>
                     </Card.Description>
                   </Card.Content>
