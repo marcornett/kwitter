@@ -1,7 +1,15 @@
-.post-date {
-    font-size: small;
+.postDate {
+  padding-top: 10px;
 }
 .likes-dislikes {
-    font-size: smaller;
+  font-size: smaller;
 }
 
+.ui.button.likeButton {
+  background-color: #21ba45;
+  color: #f0f0f0;
+}
+
+.ui.avatar.image {
+  margin-right: 30px;
+}

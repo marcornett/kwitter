@@ -34,7 +34,8 @@ const Post_Input = (props) => {
     return (
         <div>
             <div id="avatar">
-                <Image src={`https://kwitter-api.herokuapp.com${props.pictureLocation}`} avatar />
+                <Image src={props.pictureLocation ? `https://kwitter-api.herokuapp.com${props.pictureLocation}` :
+                    'https://3.bp.blogspot.com/-qDc5kIFIhb8/UoJEpGN9DmI/AAAAAAABl1s/BfP6FcBY1R8/s1600/BlueHead.jpg'} avatar />
                 {props.displayName}
             </div>
             <Form //post a message input

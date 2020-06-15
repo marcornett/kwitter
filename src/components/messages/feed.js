@@ -1,22 +1,19 @@
-import React, { Component } from "react";
-import Messages from "./Messages";
+import React from "react";
+import { Post_InputEnhanced } from "./Post_Input"
 import './Messages.css'
 import {
-  Button,
-  Card,
-  Divider,
   Grid,
   Header,
-  Image,
-  Menu,
   Segment,
-  Form,
+  Card,
+  Button,
   Icon,
-  Label
+  Label,
+  Image
 }
   from "semantic-ui-react";
 
-class FeedPage extends Component {
+class FeedPage extends React.Component {
   likeHandler = (id) => {
     this.props.addLike(id)
   }
@@ -27,86 +24,68 @@ class FeedPage extends Component {
     this.props.getMessages();
   }
 
-  render() {
-    if (this.props.messages === null) {
-      return <div></div>
-    } else {
-      return (
-        <Grid>
-          <Grid.Row centered columns={1}>
-            <Grid.Column width={8} >
-              <Segment basic>
-                <Header as="h1" textAlign="center">
-                  Type Your Message
-              </Header>
-                <Form //post a message input
-                  onSubmit={this.addHandler}
-                  style={{
-                    display: "flex",
-                    flexDirection: "column",
-                    justifyContent: "center"
-                  }}
-                >
-                  <input
-                    type="text"
-                    name="text"
-                    className="Message-input"
-                    required
-                    value={this.props.text}
-                  //onChange={this.addHandler}
-                  />
-                  <Button type="submit" className="message-submit" color='twitter'>
-                    submit
-                </Button>
-                </Form>
-                <Divider />
-                {/* {console.log(this.props.messages)} */}
-                <Header as="h1" textAlign="center">
-                  Your Feed
-                <br />
-                  {(this.props.messages).map((message) => (
-                    <Card
-                      color="black"
-                      animation="overlay"
-                      icon="labeled"
-                      width="thin"
-                      fluid
-                    >
+  // Can't figure out how to use returned image in a tag
+  // getPhotoInfo = () => {
+  //   this.props.getUserPicture('testName')
+  //     .then((result) =>
+  //       console.log(result)
+  //     )
+  // }
 
-                      <Card.Content>
-                        <Image
-                          alt=""
-                          src={message.image}
-                          style={{ maxHeight: "40px", maxWidth: "40px" }}
-                        />
-                        <Card.Description className="message-output">
-                          ~ {message.text}
-                        </Card.Description>
-                        <Card.Meta>@{message.username}</Card.Meta>
-                        <Card.Description className="likes-dislikes">
-                          <Card.Meta>
-                            {/* add a like button !! TODO: implement adding a like to post funtionality !! */}
-                            <Button color='twitter' onClick={(e) => this.props.addLike(e, message.id) || this.props.unLike(e, message.likes.id)}>
-                              <Icon name='heart' />
+  render() {
+    return (
+      <Grid>
+        <Grid.Row centered columns={1}>
+          <Grid.Column width={6} >
+            <Segment >
+              <Post_InputEnhanced />
+              <Header as="h1" textAlign="center">
+                Your Feed
+                </Header>
+              <br />
+              {(this.props.messages).map((message) => (
+                <Card
+                  color="black"
+                  animation="overlay"
+                  icon="labeled"
+                  width="thin"
+                  fluid
+                  key={Math.floor(Math.random() * 1000000)}
+                >
+                  <Card.Content>
+                    <Card.Description className="message-output">
+                      {/* <Image id="messageAvatars" src={`https://kwitter-api.herokuapp.com/users/${message.username}/picture`}
+                        alt="Profile Picture"
+                        avatar /> */}
+                      @ {message.username}
+                    </Card.Description>
+                    <Card.Meta>{message.text}</Card.Meta>
+                    <Card.Description className="likes-dislikes">
+                      <Card.Meta>
+                        <Button className="likeButton" onClick={(e) => {
+                          this.props.addLike(e, message.id)
+                          console.log(message.id)
+                          // this.props.unLike(e, message.likes.id)
+                        }
+                        }>
+                          <Icon name='heart' />
                             Like
                           </Button>
-                            <Label as='a' basic color='twitter' pointing='left'>
-                              {message.likes.length}
-                            </Label>
-                            {/* end of add a like button */}
-                            <p className='post-date'>Posted on {new Date(message.createdAt).toLocaleString()}</p>
-                          </Card.Meta>
-                        </Card.Description>
-                      </Card.Content>
-                    </Card>
-                  ))}
-                </Header>
-              </Segment>
-            </Grid.Column>
-          </Grid.Row>
-        </Grid>
-      );
-    }
+                        <Label as='a' basic pointing='left'>
+                          {message.likes.length}
+                        </Label>
+                        <p className='postDate'>{new Date(message.createdAt).toLocaleString()}</p>
+                      </Card.Meta>
+                    </Card.Description>
+                  </Card.Content>
+                </Card>
+              ))}
+            </Segment>
+          </Grid.Column>
+        </Grid.Row>
+      </Grid>
+    );
   }
 }
+
 export default FeedPage

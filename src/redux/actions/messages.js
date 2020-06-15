@@ -1,15 +1,16 @@
 import api from '../../utils/api';
 
 export const GET_MESSAGES = "GET_MESSAGES";
-export const GETMESSAGES_FAILED = "GETMESSAGES_FAILED";
+export const GET_MESSAGES_FAILED = "GET_MESSAGES_FAILED";
+export const POST_MESSAGE = "POST_MESSAGE"
+export const POST_MESSAGE_SUCCESS = "POST_MESSAGE_SUCCESS"
+export const POST_MESSAGE_FAIL = "MESSAGES/POST_MESSAGE_FAIL"
 export const ADD_LIKE = "ADD_LIKE"
 export const UN_LIKE = "UN_LIKE"
 export const ADD_LIKE_FAIL = "ADD_LIKE_FAIL"
 export const UN_LIKE_FAIL = "UN_LIKE_FAIL"
-export const POSTMESSAGE = "POSTMESSAGE"
-export const POSTMESSAGE_SUCCESS = "POSTMESSAGE_SUCCESS"
-export const POSTMESSAGE_CHAR_FAIL = "POSTMESSAGE_CHAR_FAIL"
-
+export const GET_USER_PICTURE = 'GET_USER_PICTURE'
+export const GET_USER_PICTURE_FAIL = 'GET_USER_PICTURE_FAIL'
 
 export const getMessages = () => async (dispatch, getState) => {
     try {
@@ -20,7 +21,7 @@ export const getMessages = () => async (dispatch, getState) => {
         });
     } catch (err) {
         dispatch({
-            type: GETMESSAGES_FAILED,
+            type: GET_MESSAGES_FAILED,
             payload: err.message
         })
     }
@@ -61,26 +62,36 @@ export const unLike = (e, LikeId) => async (dispatch, getState) => {
 }
 
 
-export const postMessage = text => async (dispatch, getState) => {
+export const postMessage = (text) => async (dispatch, getState) => {
     try {
-        const token = getState().auth.login.token
+        // const token = getState().auth.login.token
         const payload = await api.postMessage(text)
         dispatch({
-            type: POSTMESSAGE
+            type: POST_MESSAGE,
+            payload
         })
+        dispatch(getMessages())
     } catch (err) {
         dispatch({
-            type: POSTMESSAGE_CHAR_FAIL
+            type: POST_MESSAGE_FAIL,
+            payload: err.message
         });
-    } finally {
-        dispatch({
-            type: POSTMESSAGE_SUCCESS,
-            payload: text
-        })
     }
 };
-// update the state maybe ?
-export const updateAfterPosting = text => dispatch => {
-    return dispatch(postMessage(text))
-        .then(() => dispatch(getMessages()))
-}
+
+export const getUserPicture = (username) => async (dispatch, getState) => {
+    try {
+        // const token = getState().auth.login.token
+        const payload = await api.getUserPicture(username)
+        dispatch({
+            type: GET_USER_PICTURE,
+            payload
+        })
+        dispatch(getMessages())
+    } catch (err) {
+        dispatch({
+            type: GET_USER_PICTURE_FAIL,
+            payload: err.message
+        });
+    }
+};
