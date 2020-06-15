@@ -128,10 +128,11 @@ class API {
     }
   }
 
-  async deleteLike({ likeId }) {
+  async deleteLike(likeId) {
     try {
       const response = await this.axiosInstance.delete(`/likes/${likeId}`);
-      return Object.keys(response.likes).map(key => response.likes[key])
+      console.log(response)
+      return response
     } catch (err) {
       return err;
     }
