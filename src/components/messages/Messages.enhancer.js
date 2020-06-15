@@ -3,9 +3,11 @@ import { getMessages, postMessage, addLike, unLike, getUserPicture } from "../..
 
 const mapStateToProps = (state) => ({
     messages: state.messages.messages,
-    likes: state.messages.messages.likes,
+    likes: state.messages.likes,
     id: state.likes.id,
-    userPicture: state.messages.user
+    userPicture: state.messages.user,
+    statusCode: state.likes.statusCode
+    
 });
 
 const mapDispatchToProps = {
