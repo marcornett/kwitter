@@ -76,8 +76,6 @@ class API {
       helpMeInstructor(err);
     }
   }
-  //result = Object.keys(result.messages).map(key => result.messages[key])
-
 
   async createUser(user) {
     try {
@@ -93,16 +91,6 @@ class API {
   async deleteUser(username) {
     try {
       await this.axiosInstance.delete(`/users/${username}`);
-    } catch (err) {
-      return err;
-    }
-  }
-
-  // Unsure how image data needs to be sent, check documentation on Kwitter API for PUT User Picture
-  async getUserPicture(username) {
-    try {
-      const response = await this.axiosInstance.get(`/users/${username}/picture`);
-      return response
     } catch (err) {
       return err;
     }
@@ -160,6 +148,16 @@ class API {
       return err;
     }
   }
+
+  async getUserPicture(username) {
+    try {
+      await this.axiosInstance.get(`/users​/${username}​/picture`);
+    } catch (err) {
+      helpMeInstructor(err);
+      return err;
+    }
+  }
+
 }
 
 
