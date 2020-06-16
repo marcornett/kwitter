@@ -159,9 +159,9 @@ class API {
     }
   }
 
-  async userList() {
+  async userList(limit, offset) {
     try {
-      const response = await this.axiosInstance.get("/users")
+      const response = await this.axiosInstance.get(`/users?limit=${limit}&offset=${offset}`)
       return response
     } catch (err) {
       helpMeInstructor(err);
