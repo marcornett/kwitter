@@ -66,8 +66,6 @@ export const LoginForm = ({ login, loading, error, getUser }) => {
 								/>
 								<div type="submit" disabled={loading} className={loading ? 'ui buttons loading' : 'ui buttons'}>
 									<button className="ui button">Submit</button>
-									<div className="or" />
-									<GoogleButton />
 								</div>
 							</Segment>
 						</Form>
