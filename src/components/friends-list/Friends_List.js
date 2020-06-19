@@ -25,7 +25,7 @@ export class FriendsList extends React.Component {
 
         if (listEnd) {
             // console.log('test')
-            this.props.getUsers(this.state.limit, this.state.offset)
+            this.props.getUsers(10, this.state.offset)
             this.setState((state) => ({
                 ...this.state,
                 limit: this.state.limit,
@@ -37,14 +37,12 @@ export class FriendsList extends React.Component {
     }
 
     render() {
-        if (this.props.loading) {
-            return <Loader />
-        } else {
-            return (
-                <div>
-                    <h2 id="friendTitle">Users </h2>
-                    <div id='friendsList-Container' onScroll={this.handleScroll}>
-                        {this.props.userList.userList.users.map((user) => (
+        return (
+            <div>
+                <h2 id="friendTitle">Users </h2>
+                <div id='friendsList-Container' onScroll={this.handleScroll}>
+                    {this.props.loading ? <Loader /> :
+                        this.props.userList.userList.users.map((user) => (
                             <div id='usersContainer' >
                                 <List>
                                     <List.Item>
@@ -69,10 +67,10 @@ export class FriendsList extends React.Component {
                                 </List>
                             </div>
                         ))}
-                    </div>
                 </div>
-            )
-        }
+            </div>
+        )
     }
 }
+
 

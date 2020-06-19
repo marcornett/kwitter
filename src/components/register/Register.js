@@ -43,10 +43,10 @@ export const Register = ({ register, error }) => {
 	return (
 		<Grid textAlign="center" verticalAlign="middle" className="app">
 			<Grid.Column style={{ maxWidth: 450 }}>
-				<Header as="h1" icon color="black" textAlign="center">
-					<Icon name="globe" color="black" />
-					Register for devChat!
-				</Header>
+				<Header as="h1" icon color="green" textAlign="center">
+					<Icon name="leaf" color="green" />
+							Sign-up here.
+						</Header>
 				<Form onSubmit={handleSubmit} size="large">
 					<Segment stacked>
 						<Form.Input
@@ -97,7 +97,7 @@ export const Register = ({ register, error }) => {
 						<Button
 							disabled={user.isSubmitted}
 							className={user.isSubmitted ? 'loading' : ''}
-							color="blue"
+							color="green"
 							fluid
 							size="large"
 						>
@@ -107,7 +107,7 @@ export const Register = ({ register, error }) => {
 				</Form>
 				{user.isSubmitted ? <Redirect to="/" /> : ''}
 				<Message>
-					Already a user? <Link to="/"> Sign In</Link>
+					Already a user? <Link to="/" style={{ color: "green" }}> Sign In</Link>
 				</Message>
 			</Grid.Column>
 		</Grid>
