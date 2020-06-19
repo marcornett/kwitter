@@ -11,7 +11,7 @@ export class FriendsList extends React.Component {
             offset: 10
         }
     }
-    componentDidMount = () => {
+    componentWillMount = () => {
         this.props.getUsers(10, 0)
     }
     handleScroll = (event) => {
