@@ -42,7 +42,7 @@ export class FriendsList extends React.Component {
                 <h2 id="friendTitle">Users </h2>
                 <div id='friendsList-Container' onScroll={this.handleScroll}>
                     {this.props.loading ? <Loader /> :
-                        this.props.userList.userList.users.map((user) => (
+                        this.props.userList.users.map((user) => (
                             <div id='usersContainer' >
                                 <List>
                                     <List.Item>

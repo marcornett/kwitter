@@ -72,7 +72,7 @@ class FeedPage extends React.Component {
                         <Icon name='heart' />
                             Like
                           </Button>
-                          <Button color='red' onClick={
+                      {/* <Button color='red' onClick={
                             (e) =>
                             // console.log(message.likes.map((like) =>  like.id))
                             // &&
@@ -84,9 +84,8 @@ class FeedPage extends React.Component {
                               }
                           }))
                           }>
-                          {/* <Icon name=‘heart’ /> */}
                             Unlike
-                          </Button>
+                          </Button> */}
                       <Label as='a' basic pointing='left'>
                         {message.likes.length}
                       </Label>
