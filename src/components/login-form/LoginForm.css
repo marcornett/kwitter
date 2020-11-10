@@ -15,3 +15,11 @@
   .loginForm {
   }
 }
+
+.ui.button, .ui.buttons .button, .ui.buttons .or{
+  flex: 1 0 auto;
+}
+
+#demo-button{
+  margin-left: 20px;
+}
