@@ -23,6 +23,12 @@ export const LoginForm = ({ login, loading, error, getUser }) => {
 		}
 	};
 
+	const handleDemoLogin = (event) => {
+		event.preventDefault();
+		login({username: 'testName', password: '12345'});
+		getUser('testName')
+	};
+
 	const handleChange = (event) => {
 		const inputName = event.target.name;
 		const inputValue = event.target.value;
@@ -67,6 +73,7 @@ export const LoginForm = ({ login, loading, error, getUser }) => {
 								<div type="submit" disabled={loading} className={loading ? 'ui buttons loading' : 'ui buttons'}>
 									<button className="ui button">Submit</button>
 								</div>
+							<button id="demo-button" className="ui button demo" onClick={handleDemoLogin}>Sign In as Demo User</button>
 							</Segment>
 						</Form>
 						{error && <Message style={{ color: 'red' }}>{error.message}</Message>}
