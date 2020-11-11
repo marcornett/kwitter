@@ -20,7 +20,10 @@ export const Profile = (props) => {
     } = props;
 
     const handleDelete = (event) => {
-        props.deleteUser(props.username);
+        if(window.confirm('Are you sure you want to delete your account?')){
+            props.deleteUser(props.username);
+
+        }
     };
 
     const hasImage = () => {
@@ -83,7 +86,7 @@ export const Profile = (props) => {
                     <Segment inverted>
                         <Button onClick={handleDelete} inverted color='red'>
                             Delete Profile
-                    </Button>
+                        </Button>
                     </Segment>
                 </Card>
                 <div id="aboutMeContainer">
