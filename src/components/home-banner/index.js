@@ -5,6 +5,7 @@ export const HomeBanner = () => {
     return (
         <div className="home_banner">
             <div className="logo">Leafy</div>
+            <div className="tag_line">Social Network</div>
         </div>
     )
 }
