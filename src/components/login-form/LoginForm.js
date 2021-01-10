@@ -6,7 +6,6 @@ import './LoginForm.css';
 import { Link } from 'react-router-dom';
 
 import { Grid, Form, Segment, Message, Header, Icon } from 'semantic-ui-react';
-import GoogleButton from '../googleButton/GoogleButton';
 
 export const LoginForm = ({ login, loading, error, getUser }) => {
 	// Not to be confused with "this.setState" in classes

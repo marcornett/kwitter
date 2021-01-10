@@ -14,6 +14,7 @@ class API {
       headers: { Authorization: `Bearer ${getToken()}` },
     });
 
+    console.log(getToken())
     // Add a request interceptor to attach a
     axiosInstance.interceptors.request.use(
       (config) => ({
@@ -43,8 +44,7 @@ class API {
       });
       return result;
     } catch (err) {
-      // Instructor is logging you out because this failed
-      helpMeInstructor(err); // comedian eh?
+      console.error(err)
       return err;
     }
   }
@@ -53,7 +53,7 @@ class API {
     try {
       await this.axiosInstance.get("/auth/logout");
     } catch (err) {
-      helpMeInstructor(err);
+      console.error(err);
       return err;
     }
   }
@@ -63,7 +63,7 @@ class API {
       const response = await this.axiosInstance.get(`/users/${username}`)
       return response;
     } catch (err) {
-      helpMeInstructor(err);
+      console.error(err);
     }
   }
 
@@ -73,7 +73,7 @@ class API {
       const response = await this.axiosInstance.get("/messages?limit=100&offset=0")
       return Object.keys(response.messages).map(key => response.messages[key])
     } catch (err) {
-      helpMeInstructor(err);
+      console.error(err);
     }
   }
 
@@ -83,7 +83,7 @@ class API {
         user
       );
     } catch (err) {
-      helpMeInstructor(err);
+      console.error(err);
       return err;
     }
   }
@@ -154,7 +154,7 @@ class API {
     try {
       await this.axiosInstance.get(`/users​/${username}​/picture`);
     } catch (err) {
-      helpMeInstructor(err);
+      console.error(err);
       return err;
     }
   }
@@ -164,27 +164,10 @@ class API {
       const response = await this.axiosInstance.get(`/users?limit=${limit}&offset=${offset}`)
       return response
     } catch (err) {
-      helpMeInstructor(err);
+      console.error(err);
     }
   }
 
-}
-
-
-// WARNING.. do not touch below this line if you want to have a good day =]
-
-function helpMeInstructor(err) {
-  console.info(
-    `
-    Did you hit CORRECT the endpoint?
-    Did you send the CORRECT data?
-    Did you make the CORRECT kind of request [GET/POST/PATCH/DELETE]?
-    Check the Kwitter docs 👉🏿 https://kwitter-api.herokuapp.com/docs/#/
-    Check the Axios docs 👉🏿 https://github.com/axios/axios
-    TODO: troll students
-  `,
-    err
-  );
 }
 
 function getToken() {

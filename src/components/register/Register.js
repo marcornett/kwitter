@@ -1,6 +1,5 @@
 import React, { useState } from 'react';
 import ProptTypes from 'prop-types';
-import Loader from '../loader/Loader';
 import { Grid, Form, Segment, Button, Header, Message, Icon } from 'semantic-ui-react';
 import { Link, Redirect } from 'react-router-dom';
 
@@ -22,8 +21,6 @@ export const Register = ({ register, error }) => {
 
 	const handleSubmit = (evt) => {
 		evt.preventDefault();
-		console.log({ user });
-
 		register({
 			username: user.username,
 			displayName: user.displayName,

@@ -1,7 +1,7 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import './NotFound.css'
-import { Card, Portal, Message } from "semantic-ui-react";
+import { Card, Message } from "semantic-ui-react";
 
 const NotFound = ({ location }) => (
   <React.Fragment >

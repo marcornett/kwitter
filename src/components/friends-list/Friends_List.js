@@ -15,24 +15,18 @@ export class FriendsList extends React.Component {
         this.props.getUsers(10, 0)
     }
     handleScroll = (event) => {
-        // console.log(event.target.scrollHeight)
-        // console.log(event.target.scrollTop)
-        // console.log(event.target.clientHeight)
         const scrollHeight = event.target.scrollHeight
         const scrollTop = event.target.scrollTop
         const clientHeight = event.target.clientHeight
         const listEnd = scrollHeight - scrollTop === clientHeight
 
         if (listEnd) {
-            // console.log('test')
             this.props.getUsers(10, this.state.offset)
             this.setState((state) => ({
                 ...this.state,
                 limit: this.state.limit,
                 offset: this.state.offset + 10
             }))
-            // this.props.userList.userList.users.concat(await this.props.getUsers(10, this.state.offset).users)
-            // console.log('bottom')
         }
     }
 
@@ -57,7 +51,7 @@ export class FriendsList extends React.Component {
                                             <List.Header id="displayName" as='a'>{user.displayName}</List.Header>
                                             <List.Description>
                                                 Last seen on at
-                                            <a id="date">
+                                            <a href="" id="date">
                                                     <b> {new Date(user.updatedAt).toLocaleDateString()}</b>
                                                 </a>{' '}.
                                         </List.Description>
