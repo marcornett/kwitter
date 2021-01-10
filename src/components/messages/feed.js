@@ -1,5 +1,5 @@
 import React from "react";
-import { Post_InputEnhanced } from "./Post_Input"
+import { PostInputEnhanced } from "./PostInput"
 import './Messages.css'
 import {
   Header,
@@ -39,7 +39,7 @@ class FeedPage extends React.Component {
       return (
         <div id='mainFeed'>
           <Segment>
-            <Post_InputEnhanced />
+            <PostInputEnhanced />
             <Header as="h1" textAlign="center">
               Your Feed
                 </Header>

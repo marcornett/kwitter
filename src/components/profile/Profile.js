@@ -8,7 +8,7 @@ export const Profile = (props) => {
     const [image, handleImageChange] = useState(true)
     useEffect(() => {
         props.getUser(props.username)
-    }, [image]);
+    }, [image, props]);
 
     const {
         username,

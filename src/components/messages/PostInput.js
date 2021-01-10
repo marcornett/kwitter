@@ -1,11 +1,10 @@
 import React from 'react'
 import { connect } from "react-redux";
 import { getMessages, postMessage } from "../../redux/actions/messages";
-import './Post_Input.css'
+import './PostInput.css'
 import { useState } from 'react'
 import {
     Button,
-    Header,
     Form,
     Icon,
     Input,
@@ -14,7 +13,7 @@ import {
     from "semantic-ui-react";
 import { useEffect } from 'react';
 
-const Post_Input = (props) => {
+const PostInput = (props) => {
     const [inputData, addInputMessage] = useState('')
     const [sent, postMessage] = useState(false)
 
@@ -77,4 +76,4 @@ const mapDispatchToProps = {
     postMessage,
 };
 
-export const Post_InputEnhanced = connect(mapStateToProps, mapDispatchToProps)(Post_Input);
+export const PostInputEnhanced = connect(mapStateToProps, mapDispatchToProps)(PostInput);
